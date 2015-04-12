@@ -2,10 +2,16 @@
 <proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_getPlan" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
 	<target>
 		<inSequence>
-								<property name="planId" expression="json-eval($.planId)" />
-								<chargebee.getPlan>
-							<planId>{$ctx:planId}</planId>
-						</chargebee.getPlan>
+			<property name="apiUrl" expression="json-eval($.apiUrl)"/>
+			<property name="apiKey" expression="json-eval($.apiKey)"/>
+			<property name="planId" expression="json-eval($.planId)" />
+			<chargebee.init>
+	            <apiUrl>{$ctx:apiUrl}</apiUrl>
+	            <apiKey>{$ctx:apiKey}</apiKey>
+         	</chargebee.init>
+			<chargebee.getPlan>
+				<planId>{$ctx:planId}</planId>
+			</chargebee.getPlan>
 			<respond />
 		</inSequence>
 		<outSequence>
