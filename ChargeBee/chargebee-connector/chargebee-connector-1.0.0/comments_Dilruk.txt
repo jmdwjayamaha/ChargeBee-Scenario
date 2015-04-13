@@ -1,0 +1,11 @@
+Methods:
+	createPlan
+	getPlan
+	listPlans
+
+TO DO:
+1. 	Check formatting
+2.	Add Header removal configs
+
+NOTE:
+	Added missing parameter (invoice_notes) to createPlan method
