@@ -25,25 +25,25 @@
 				<apiUrl>{$ctx:apiUrl}</apiUrl>
 				<apiKey>{$ctx:apiKey}</apiKey>
 			</chargebee.init>
-				<chargebee.createPlan>
-					<planId>{$ctx:planId}</planId>
-					<planName>{$ctx:planName}</planName>
-					<invoiceName>{$ctx:invoiceName}</invoiceName>
-					<description>{$ctx:description}</description>
-					<trialPeriod>{$ctx:trialPeriod}</trialPeriod>
-					<trialPeriodUnit>{$ctx:trialPeriodUnit}</trialPeriodUnit>
-					<period>{$ctx:period}</period>
-					<periodUnit>{$ctx:periodUnit}</periodUnit>
-					<setupCost>{$ctx:setupCost}</setupCost>
-					<price>{$ctx:price}</price>
-					<billingCycles>{$ctx:billingCycles}</billingCycles>
-					<chargeModel>{$ctx:chargeModel}</chargeModel>
-					<freeQuantity>{$ctx:freeQuantity}</freeQuantity>
-					<downgradePenalty>{$ctx:downgradePenalty}</downgradePenalty>
-					<redirectUrl>{$ctx:redirectUrl}</redirectUrl>
-					<enabledInHostedPages>{$ctx:enabledInHostedPages}</enabledInHostedPages>
-					<invoiceNotes>{$ctx:invoiceNotes}</invoiceNotes>
-				</chargebee.createPlan>
+			<chargebee.createPlan>
+				<planId>{$ctx:planId}</planId>
+				<planName>{$ctx:planName}</planName>
+				<invoiceName>{$ctx:invoiceName}</invoiceName>
+				<description>{$ctx:description}</description>
+				<trialPeriod>{$ctx:trialPeriod}</trialPeriod>
+				<trialPeriodUnit>{$ctx:trialPeriodUnit}</trialPeriodUnit>
+				<period>{$ctx:period}</period>
+				<periodUnit>{$ctx:periodUnit}</periodUnit>
+				<setupCost>{$ctx:setupCost}</setupCost>
+				<price>{$ctx:price}</price>
+				<billingCycles>{$ctx:billingCycles}</billingCycles>
+				<chargeModel>{$ctx:chargeModel}</chargeModel>
+				<freeQuantity>{$ctx:freeQuantity}</freeQuantity>
+				<downgradePenalty>{$ctx:downgradePenalty}</downgradePenalty>
+				<redirectUrl>{$ctx:redirectUrl}</redirectUrl>
+				<enabledInHostedPages>{$ctx:enabledInHostedPages}</enabledInHostedPages>
+				<invoiceNotes>{$ctx:invoiceNotes}</invoiceNotes>
+			</chargebee.createPlan>
 			<respond />
 		</inSequence>
 		<outSequence>
