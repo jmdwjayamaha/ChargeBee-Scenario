@@ -303,4 +303,254 @@ public class ChargebeeConnectorIntegrationTest extends ConnectorIntegrationTestB
 		        apiRestResponse.getBody().getString("error_code"));
 	}
 
+	/**
+     * Positive test case for createCoupon method with mandatory parameters.
+     * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.            
+     */
+    @Test(groups = { "wso2.esb" }, description = "chargebee {createCoupon} integration test with mandatory parameters.")
+    public void testCreateCouponWithMandatoryParameters() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:createCoupon");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_createCoupon_mandatory.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
+       final String couponId = esbRestResponse.getBody().getJSONObject("coupon").getString("id");
+       connectorProperties.setProperty("couponId", couponId);
+       
+       final String apiEndPoint = apiUrl+"/coupons/" + couponId;
+       final RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       final JSONObject apiResponseObject=apiRestResponse.getBody().getJSONObject("coupon");
+       
+       Assert.assertEquals(apiResponseObject.getString("id"), connectorProperties.getProperty("couponIdMand"));
+       Assert.assertEquals(apiResponseObject.getString("name"), connectorProperties.getProperty("couponNameMand"));
+       Assert.assertEquals(apiResponseObject.getString("discount_amount"), connectorProperties.getProperty("discountAmount"));
+       Assert.assertEquals(apiResponseObject.getString("duration_type"), connectorProperties.getProperty("durationType"));
+    }
+    
+    /**
+     * Positive test case for createCoupon method with optional parameters.
+     * 
+     * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.     
+     */
+    @Test(groups = { "wso2.esb" }, description = "chargebee {createCoupon} integration test with optional parameters.")
+    public void testCreateCouponWithOptionalParameters() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:createCoupon");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_createCoupon_optional.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
+       final String couponId = esbRestResponse.getBody().getJSONObject("coupon").getString("id");
+       
+       final String apiEndPoint = apiUrl+ "/coupons/" + couponId;
+       final RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       final JSONObject apiResponseObject=apiRestResponse.getBody().getJSONObject("coupon");
+       
+       Assert.assertEquals(apiResponseObject.getString("invoice_name"), connectorProperties.getProperty("invoiceNameOpt"));
+       Assert.assertEquals(apiResponseObject.getString("invoice_notes"), connectorProperties.getProperty("invoiceNotesOpt"));
+       Assert.assertEquals(apiResponseObject.getString("valid_till"), connectorProperties.getProperty("validTill"));
+       Assert.assertEquals(apiResponseObject.getString("max_redemptions"), connectorProperties.getProperty("maxRedemptions"));   
+    }
+    
+    /**
+     * Negative test case for createCoupon method.
+     * 
+     * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.     
+     */
+    @Test(groups = { "wso2.esb" }, description = "chargebee {createCoupon} integration test with negative case.")
+    public void testCreateCouponWithNegativeCase() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:createCoupon");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_createCoupon_negative.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
+       
+       final String apiEndPoint = apiUrl + "/coupons";
+       final RestResponse<JSONObject> apiRestResponse =
+             sendJsonRestRequest(apiEndPoint, "POST", apiRequestHeadersMap, "api_createCoupon_negative.json");
+       
+       Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 400);
+       Assert.assertEquals(esbRestResponse.getBody().getString("error_code"), apiRestResponse.getBody().getString("error_code"));
+       Assert.assertEquals(esbRestResponse.getBody().getString("error_msg"), apiRestResponse.getBody().getString("error_msg"));
+       Assert.assertEquals(esbRestResponse.getBody().getString("error_param"), apiRestResponse.getBody().getString("error_param"));
+       Assert.assertEquals(esbRestResponse.getBody().getString("message"), apiRestResponse.getBody().getString("message"));
+    }
+    
+    /**
+     * Positive test case for getCoupon method with mandatory parameters.
+     * 
+     * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.     
+     */
+    @Test(groups = { "wso2.esb" }, dependsOnMethods = { "testCreateCouponWithMandatoryParameters" }, description = "chargebee {getCoupon} integration test with mandatory parameters.")
+    public void testGetCouponWithMandatoryParameters() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:getCoupon");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_getCoupon_mandatory.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
+       
+       final JSONObject esbResponseObject= esbRestResponse.getBody().getJSONObject("coupon");
+       
+       final String apiEndPoint = apiUrl + "/coupons/" + connectorProperties.getProperty("couponId");
+       final RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       
+       Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
+       
+       final JSONObject apiResponseObject= apiRestResponse.getBody().getJSONObject("coupon");
+       
+       Assert.assertEquals(esbResponseObject.getString("id"), apiResponseObject.getString("id"));
+       Assert.assertEquals(esbResponseObject.getString("name"), apiResponseObject.getString("name"));
+       Assert.assertEquals(esbResponseObject.getString("discount_type"), apiResponseObject.getString("discount_type"));
+       Assert.assertEquals(esbResponseObject.getString("apply_on"), apiResponseObject.getString("apply_on"));
+       Assert.assertEquals(esbResponseObject.getLong("created_at"), apiResponseObject.getLong("created_at"));
+    }
+    
+    /**
+	 * Negative test case for getCoupon method.
+	 * 
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.
+	 */
+	@Test(groups = { "wso2.esb" }, description = "chargebee {getCoupon} integration test with negative case.")
+	public void testgetCouponWithNegativeCase() throws IOException, JSONException {
+
+		esbRequestHeadersMap.put("Action", "urn:getCoupon");
+		RestResponse<JSONObject> esbRestResponse = sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap,
+		        "esb_getCoupon_negative.json");
+		Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 404);
+
+		String apiEndPoint = apiUrl + "/coupons/INVALID";
+		RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+
+		Assert.assertEquals(esbRestResponse.getBody().getString("error_code"), apiRestResponse.getBody().getString("error_code"));
+	    Assert.assertEquals(esbRestResponse.getBody().getString("error_msg"), apiRestResponse.getBody().getString("error_msg"));
+	    Assert.assertEquals(esbRestResponse.getBody().getString("message"), apiRestResponse.getBody().getString("message"));
+	}
+    
+    /**
+     * Positive test case for listCoupons method with mandatory parameters.
+     * 
+     * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.     
+     */
+    @Test(groups = { "wso2.esb" }, dependsOnMethods = { "testCreateCouponWithMandatoryParameters","testCreateCouponWithOptionalParameters" }, description = "chargebee {listCoupons} integration test with mandatory parameters.")
+    public void testListCouponsWithMandatoryParameters() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:listCoupons");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_listCoupons_mandatory.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
+       
+       final int esbResponseArrayLength= esbRestResponse.getBody().getJSONArray("list").length();
+       final JSONObject esbResponseObjectOne=esbRestResponse.getBody().getJSONArray("list").getJSONObject(0).getJSONObject("coupon");
+       
+       final String apiEndPoint = apiUrl + "/coupons";
+       final RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       
+       Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
+       
+       final int apiResponseArrayLength= apiRestResponse.getBody().getJSONArray("list").length();
+       final JSONObject apiResponseObjectOne=apiRestResponse.getBody().getJSONArray("list").getJSONObject(0).getJSONObject("coupon");
+       
+       Assert.assertEquals(esbResponseArrayLength, apiResponseArrayLength);
+       
+       Assert.assertEquals(esbResponseObjectOne.getString("id"), apiResponseObjectOne.getString("id"));
+       Assert.assertEquals(esbResponseObjectOne.getString("name"), apiResponseObjectOne.getString("name"));
+       Assert.assertEquals(esbResponseObjectOne.getString("discount_type"), apiResponseObjectOne.getString("discount_type"));
+       Assert.assertEquals(esbResponseObjectOne.getString("apply_on"), apiResponseObjectOne.getString("apply_on"));
+       Assert.assertEquals(esbResponseObjectOne.getString("created_at"), apiResponseObjectOne.getString("created_at"));
+    }
+    
+    /**
+     * Positive test case for listCoupons method with optional parameters.
+     * 
+     * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.     
+     */
+    @Test(groups = { "wso2.esb" }, dependsOnMethods = { "testCreateCouponWithMandatoryParameters","testCreateCouponWithOptionalParameters" }, description = "chargebee {listCoupons} integration test with optional parameters.")
+    public void testListCouponsWithOptionalParameters() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:listCoupons");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_listCoupons_optional.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 200);
+       
+       int esbResponseArrayLength= esbRestResponse.getBody().getJSONArray("list").length();
+       
+       String apiEndPoint = apiUrl + "/coupons";
+       RestResponse<JSONObject> apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       
+       Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 200);
+       
+       int apiResponseArrayLength= apiRestResponse.getBody().getJSONArray("list").length();
+       
+       Assert.assertNotEquals(esbResponseArrayLength, apiResponseArrayLength);
+       
+       apiEndPoint = apiUrl + "/coupons?limit=1";
+       apiRestResponse = sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       apiResponseArrayLength= apiRestResponse.getBody().getJSONArray("list").length();
+       
+       Assert.assertEquals(esbResponseArrayLength, apiResponseArrayLength);
+   
+    }
+    
+    /**
+     * Negative test case for listCoupons method.
+     * 
+     * @throws IOException
+	 *             Signals that an I/O exception has occurred.
+	 * @throws JSONException
+	 *             if JSON exception occurred.     
+     */
+    @Test(groups = { "wso2.esb" }, description = "chargebee {listCoupons} integration test with negative case.")
+    public void testListCouponsWithNegativeCase() throws IOException, JSONException {
+    
+       esbRequestHeadersMap.put("Action", "urn:listCoupons");
+       
+       final RestResponse<JSONObject> esbRestResponse =
+             sendJsonRestRequest(proxyUrl, "POST", esbRequestHeadersMap, "esb_listCoupons_negative.json");
+       
+       Assert.assertEquals(esbRestResponse.getHttpStatusCode(), 400);
+       
+       final String apiEndPoint = apiUrl + "/coupons?limit=INVALID";
+       final RestResponse<JSONObject> apiRestResponse =
+             sendJsonRestRequest(apiEndPoint, "GET", apiRequestHeadersMap);
+       
+       Assert.assertEquals(apiRestResponse.getHttpStatusCode(), 400);
+       Assert.assertEquals(esbRestResponse.getBody().getString("error_code"), apiRestResponse.getBody().getString("error_code"));
+       Assert.assertEquals(esbRestResponse.getBody().getString("error_msg"), apiRestResponse.getBody().getString("error_msg"));
+       Assert.assertEquals(esbRestResponse.getBody().getString("error_param"), apiRestResponse.getBody().getString("error_param"));
+       Assert.assertEquals(esbRestResponse.getBody().getString("message"), apiRestResponse.getBody().getString("message"));
+    }
+
 }

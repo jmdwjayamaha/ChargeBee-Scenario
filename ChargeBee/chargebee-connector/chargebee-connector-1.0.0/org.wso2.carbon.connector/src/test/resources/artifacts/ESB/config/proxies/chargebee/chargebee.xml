@@ -42,6 +42,18 @@
 			<property name="redirectUrl" expression="json-eval($.redirectUrl)" />
 			<property name="enabledInHostedPages" expression="json-eval($.enabledInHostedPages)" />
 			<property name="invoiceNotes" expression="json-eval($.invoiceNotes)" />
+
+			<property name="couponId" expression="json-eval($.couponId)" />
+	        <property name="couponName" expression="json-eval($.couponName)" />
+	        <property name="discountType" expression="json-eval($.discountType)" />
+	        <property name="applyOn" expression="json-eval($.applyOn)" />
+	        <property name="discountAmount" expression="json-eval($.discountAmount)" />
+	        <property name="invoiceName" expression="json-eval($.invoiceName)" />
+	        <property name="invoiceNotes" expression="json-eval($.invoiceNotes)" />
+	        <property name="validTill" expression="json-eval($.validTill)" />
+	        <property name="durationType" expression="json-eval($.durationType)" />
+	        <property name="maxRedemptions" expression="json-eval($.maxRedemptions)" />
+
 			<chargebee.init>
 				<apiUrl>{$ctx:apiUrl}</apiUrl>
 				<apiKey>{$ctx:apiKey}</apiKey>
@@ -79,6 +91,30 @@
 						<planId>{$ctx:planId}</planId>
 					</chargebee.getPlan>
 				</case>
+				<case regex="urn:createCoupon">
+	               <chargebee.createCoupon>
+	                  <couponId>{$ctx:couponId}</couponId>
+	                  <couponName>{$ctx:couponName}</couponName>
+	                  <discountType>{$ctx:discountType}</discountType>
+	                  <applyOn>{$ctx:applyOn}</applyOn>
+	                  <discountAmount>{$ctx:discountAmount}</discountAmount>
+	                  <invoiceName>{$ctx:invoiceName}</invoiceName>
+	                  <invoiceNotes>{$ctx:invoiceNotes}</invoiceNotes>
+	                  <validTill>{$ctx:validTill}</validTill>
+	                  <durationType>{$ctx:durationType}</durationType>
+	                  <maxRedemptions>{$ctx:maxRedemptions}</maxRedemptions>
+	               </chargebee.createCoupon>
+	            </case>
+	            <case regex="urn:getCoupon">
+	               <chargebee.getCoupon>
+	                  <couponId>{$ctx:couponId}</couponId>
+	               </chargebee.getCoupon>
+	            </case>
+	            <case regex="urn:listCoupons">
+	               <chargebee.listCoupons>
+	                  <limit>{$ctx:limit}</limit>
+	               </chargebee.listCoupons>
+	            </case>
 			</switch>
 			<respond />
 		</inSequence>

@@ -54,7 +54,4 @@ Steps to follow in setting integration test.
 	
  6. Navigate to "{ChargeBee_Connector_Home}/chargebee-connector/chargebee-connector-1.0.0/org.wso2.carbon.connector/" and run the following command.
       $ mvn clean install
-	  
-	  Note:- ChargeBee trial account expires within 30 days.
-
 		
