@@ -1,54 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2005-2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/subscriptions#create_subscription_for_customer -->
 <template name="createSubscriptionForCustomer" xmlns="http://ws.apache.org/ns/synapse">
-		<parameter name="subscriptionId" description="The subscriptionId" />
-		<parameter name="planId" description="The planId" />
-		<parameter name="planQuantity" description="The planQuantity" />
-		<parameter name="startDate" description="The startDate" />
-		<parameter name="trialEndDate" description="The trialEndDate" />
-		<parameter name="billingCycles" description="The billingCycles" />
-		<parameter name="couponId" description="The couponId" />
-		<parameter name="shippingAddressFirstName" description="The shippingAddressFirstName" />
-		<parameter name="shippingAddressLastName" description="The shippingAddressLastName" />
-		<parameter name="shippingAddressEmail" description="The shippingAddressEmail" />
-		<parameter name="shippingAddressCompanyName" description="The shippingAddressCompanyName" />
-		<parameter name="shippingAddressPhoneNumber" description="The shippingAddressPhoneNumber" />
-		<parameter name="shippingAddressLine1" description="The shippingAddressLine1" />
-		<parameter name="shippingAddressLine2" description="The shippingAddressLine2" />
-		<parameter name="shippingAddressLine3" description="The shippingAddressLine3" />
-		<parameter name="shippingAddressCity" description="The shippingAddressCity" />
-		<parameter name="shippingAddressStateCode" description="The shippingAddressStateCode" />
-		<parameter name="shippingAddressState" description="The shippingAddressState" />
-		<parameter name="shippingAddressZip" description="The shippingAddressZip" />
-		<parameter name="shippingAddressCountry" description="The shippingAddressCountry" />
-		<parameter name="addonIds" description="The addonIds" />
-		<parameter name="addonsQuantity" description="The addonsQuantity" />
-		<sequence>
-				<property expression="$func:subscriptionId" name="uri.var.subscriptionId" />
-				<property expression="$func:planId" name="uri.var.planId" />
-				<property expression="$func:planQuantity" name="uri.var.planQuantity" />
-				<property expression="$func:startDate" name="uri.var.startDate" />
-				<property expression="$func:trialEndDate" name="uri.var.trialEndDate" />
-				<property expression="$func:billingCycles" name="uri.var.billingCycles" />
-				<property expression="$func:couponId" name="uri.var.couponId" />
-				<property expression="$func:shippingAddressFirstName" name="uri.var.shippingAddressFirstName" />
-				<property expression="$func:shippingAddressLastName" name="uri.var.shippingAddressLastName" />
-				<property expression="$func:shippingAddressEmail" name="uri.var.shippingAddressEmail" />
-				<property expression="$func:shippingAddressCompanyName" name="uri.var.shippingAddressCompanyName" />
-				<property expression="$func:shippingAddressPhoneNumber" name="uri.var.shippingAddressPhoneNumber" />
-				<property expression="$func:shippingAddressLine1" name="uri.var.shippingAddressLine1" />
-				<property expression="$func:shippingAddressLine2" name="uri.var.shippingAddressLine2" />
-				<property expression="$func:shippingAddressLine3" name="uri.var.shippingAddressLine3" />
-				<property expression="$func:shippingAddressCity" name="uri.var.shippingAddressCity" />
-				<property expression="$func:shippingAddressStateCode" name="uri.var.shippingAddressStateCode" />
-				<property expression="$func:shippingAddressState" name="uri.var.shippingAddressState" />
-				<property expression="$func:shippingAddressZip" name="uri.var.shippingAddressZip" />
-				<property expression="$func:shippingAddressCountry" name="uri.var.shippingAddressCountry" />
-				<property expression="$func:addonIds" name="uri.var.addonIds" />
-				<property expression="$func:addonsQuantity" name="uri.var.addonsQuantity" />
-						<call>
-			<endpoint>
-				<http method="post" uri-template="{uri.var.apiUrl}" />
-			</endpoint>
-		</call>
-	</sequence>
+   <parameter name="customerId" description="The unique identifier of the customer." />
+   <parameter name="subscriptionId" description="The unique identifier of the subscription." />
+   <parameter name="planId" description="The unique identifier of a plan to subscribe to." />
+   <parameter name="planQuantity" description="The quantity of the plan to be subscribed." />
+   <parameter name="startDate" description="The subscription start date in UTC timestamp." />
+   <parameter name="trialEndDate" description="The end date of a trial subscription in UTC timestamp." />
+   <parameter name="billingCycles" description="The number of cycles this subscription should be charged." />
+   <parameter name="couponId" description="The unique identifier of a coupon." />
+   <parameter name="pONumber" description="The purchase order number." />
+   <parameter name="invoiceNotes" description="The notes to be added to the invoice." />
+   <parameter name="shippingAddressFirstName" description="The first name of the shipping address." />
+   <parameter name="shippingAddressLastName" description="The last name of the shipping address." />
+   <parameter name="shippingAddressEmail" description="The email related to the shipping address." />
+   <parameter name="shippingAddressCompanyName" description="The company name for the shipping address." />
+   <parameter name="shippingAddressPhoneNumber" description="The phone number related to the shipping address." />
+   <parameter name="shippingAddressLine1" description="The line1 of the shipping address." />
+   <parameter name="shippingAddressLine2" description="The line2 of the shipping address." />
+   <parameter name="shippingAddressLine3" description="The line3 of the shipping address." />
+   <parameter name="shippingAddressCity" description="The city of the shipping address." />
+   <parameter name="shippingAddressStateCode" description="The state code of the shipping address." />
+   <parameter name="shippingAddressState" description="The state of the shipping address." />
+   <parameter name="shippingAddressZip" description="The zip or postal code of the shipping address." />
+   <parameter name="shippingAddressCountry" description="The country of the shipping address." />
+   <parameter name="addonIds" description="The identifiers of the addons." />
+   <parameter name="addonsQuantity" description="The quantity of the addons related to the provided IDs." />
+   <sequence>
+      <property expression="$func:customerId" name="uri.var.customerId" />
+      <property expression="$func:subscriptionId" name="uri.var.subscriptionId" />
+      <property expression="$func:planId" name="uri.var.planId" />
+      <property expression="$func:planQuantity" name="uri.var.planQuantity" />
+      <property expression="$func:startDate" name="uri.var.startDate" />
+      <property expression="$func:trialEndDate" name="uri.var.trialEndDate" />
+      <property expression="$func:billingCycles" name="uri.var.billingCycles" />
+      <property expression="$func:couponId" name="uri.var.couponId" />
+      <property expression="$func:pONumber" name="uri.var.pONumber" />
+      <property expression="$func:invoiceNotes" name="uri.var.invoiceNotes" />
+      <property expression="$func:shippingAddressFirstName" name="uri.var.shippingAddressFirstName" />
+      <property expression="$func:shippingAddressLastName" name="uri.var.shippingAddressLastName" />
+      <property expression="$func:shippingAddressEmail" name="uri.var.shippingAddressEmail" />
+      <property expression="$func:shippingAddressCompanyName" name="uri.var.shippingAddressCompanyName" />
+      <property expression="$func:shippingAddressPhoneNumber" name="uri.var.shippingAddressPhoneNumber" />
+      <property expression="$func:shippingAddressLine1" name="uri.var.shippingAddressLine1" />
+      <property expression="$func:shippingAddressLine2" name="uri.var.shippingAddressLine2" />
+      <property expression="$func:shippingAddressLine3" name="uri.var.shippingAddressLine3" />
+      <property expression="$func:shippingAddressCity" name="uri.var.shippingAddressCity" />
+      <property expression="$func:shippingAddressStateCode" name="uri.var.shippingAddressStateCode" />
+      <property expression="$func:shippingAddressState" name="uri.var.shippingAddressState" />
+      <property expression="$func:shippingAddressZip" name="uri.var.shippingAddressZip" />
+      <property expression="$func:shippingAddressCountry" name="uri.var.shippingAddressCountry" />
+      <property expression="$func:addonIds" name="uri.var.addonIds" />
+      <property expression="$func:addonsQuantity" name="uri.var.addonsQuantity" />
+      
+      <!-- TODO: Mechanism to handle addonIds and addonQuantity -->
+      
+      <payloadFactory media-type="json">
+         <format> { "plan_id":"$1"}
+         </format>
+         <args>
+            <arg expression="get-property('uri.var.planId')" />
+         </args>
+      </payloadFactory>
+      <script language="js">
+         <![CDATA[
+            // Generate request payload with optional parameters
+            var subscriptionId = mc.getProperty('uri.var.subscriptionId');
+            var planQuantity = mc.getProperty('uri.var.planQuantity');
+            var startDate = mc.getProperty('uri.var.startDate');
+            var trialEndDate = mc.getProperty('uri.var.trialEndDate');
+            var billingCycles = mc.getProperty('uri.var.billingCycles');
+            var couponId = mc.getProperty('uri.var.couponId');
+            var pONumber = mc.getProperty('uri.var.pONumber');
+            var invoiceNotes = mc.getProperty('uri.var.invoiceNotes');
+            var shippingAddressFirstName = mc.getProperty('uri.var.shippingAddressFirstName');
+            var shippingAddressLastName = mc.getProperty('uri.var.shippingAddressLastName');
+            var shippingAddressEmail = mc.getProperty('uri.var.shippingAddressEmail');
+            var shippingAddressCompanyName = mc.getProperty('uri.var.shippingAddressCompanyName');
+            var shippingAddressPhoneNumber = mc.getProperty('uri.var.shippingAddressPhoneNumber');
+            var shippingAddressLine1 = mc.getProperty('uri.var.shippingAddressLine1');
+            var shippingAddressLine2 = mc.getProperty('uri.var.shippingAddressLine2');
+            var shippingAddressLine3 = mc.getProperty('uri.var.shippingAddressLine3');
+            var shippingAddressCity = mc.getProperty('uri.var.shippingAddressCity');
+            var shippingAddressStateCode = mc.getProperty('uri.var.shippingAddressStateCode');
+            var shippingAddressState = mc.getProperty('uri.var.shippingAddressState');
+            var shippingAddressZip = mc.getProperty('uri.var.shippingAddressZip');
+            var shippingAddressCountry = mc.getProperty('uri.var.shippingAddressCountry');
+            
+            var payload = mc.getPayloadJSON();
+            if (subscriptionId != null && subscriptionId != "") {
+               payload.id = subscriptionId;
+            }
+            if (planQuantity != null && planQuantity != "") {
+               payload.plan_quantity = planQuantity;
+            }
+            if (startDate != null && startDate != "") {
+               payload. start_date = startDate;
+            }
+            if (trialEndDate != null && trialEndDate != "") {
+               payload.trial_end = trialEndDate;
+            }
+            if (billingCycles != null && billingCycles != "") {
+               payload.billing_cycles = billingCycles;
+            }
+            if (couponId != null && couponId != "") {
+               payload.coupon = couponId;
+            }
+            if (pONumber != null && pONumber != "") {
+               payload.po_number = pONumber;
+            }
+            if (invoiceNotes != null && invoiceNotes != "") {
+               payload.invoice_notes = invoiceNotes;
+            }
+            if (shippingAddressFirstName != null && shippingAddressFirstName != "") {
+               payload.shipping_address[first_name] = shippingAddressFirstName;
+            }
+            if (shippingAddressLastName != null && shippingAddressLastName != "") {
+               payload.shipping_address[last_name] = shippingAddressLastName;
+            }
+            if (shippingAddressEmail != null && shippingAddressEmail != "") {
+               payload.shipping_address[email] = shippingAddressEmail;
+            }
+            if (shippingAddressCompanyName != null && shippingAddressCompanyName != "") {
+               payload.shipping_address[company] = shippingAddressCompanyName;
+            }
+            if (shippingAddressPhoneNumber != null && shippingAddressPhoneNumber != "") {
+               payload.shipping_address[phone] = shippingAddressPhoneNumber;
+            }
+            if (shippingAddressLine1 != null && shippingAddressLine1 != "") {
+               payload.shipping_address[line1] = shippingAddressLine1;
+            }
+            if (shippingAddressLine2 != null && shippingAddressLine2 != "") {
+               payload.shipping_address[line2] = shippingAddressLine2;
+            }
+            if (shippingAddressLine3 != null && shippingAddressLine3 != "") {
+               payload.shipping_address[line3] = shippingAddressLine3;
+            }
+            if (shippingAddressCity != null && shippingAddressCity != "") {
+               payload.shipping_address[city] = shippingAddressCity;
+            }
+            if (shippingAddressStateCode != null && shippingAddressStateCode != "") {
+               payload.shipping_address[state_code] = shippingAddressStateCode;
+            }
+            if (shippingAddressState != null && shippingAddressState != "") {
+               payload.shipping_address[state] = shippingAddressState;
+            }
+            if (shippingAddressZip != null && shippingAddressZip != "") {
+               payload.shipping_address[zip] = shippingAddressZip;
+            }
+            if (shippingAddressCountry != null && shippingAddressCountry != "") {
+               payload.shipping_address[country] = shippingAddressCountry;
+            }
+                        
+            mc.setPayloadJSON(payload);
+         ]]>
+      </script>
+      <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2" />
+      <call>
+         <endpoint>
+            <http method="post" uri-template="{uri.var.apiUrl}/customers/{uri.var.customerId}/subscriptions" />
+         </endpoint>
+      </call>
+   </sequence>
 </template>

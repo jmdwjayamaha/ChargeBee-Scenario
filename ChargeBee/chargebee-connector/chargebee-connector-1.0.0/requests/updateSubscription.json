@@ -1,13 +1,17 @@
 {
+   "apiUrl" : "https://virasoft-test.chargebee.com",
+   "apiKey" : "test_FcdtRk15eZMFlv0yz5VSjcdNBukdmriWsW",
+   "subscriptionId" : "",
 	"planId" : "",
 	"planQuantity" : "",
 	"startDate" : "",
 	"trialEndDate" : "",
 	"billingCycles" : "",
-	"replaceAddonList" : "",
+	"isReplaceAddonList" : "",
 	"couponId" : "",
-	"prorate" : "",
-	"endOfTerm" : "",
+	"isProrated" : "",
+	"isEndOfTerm" : "",
+	"invoiceNotes" : "",
 	"cardGateway" : "",
 	"cardTmpToken" : "",
 	"cardFirstName" : "",
@@ -52,5 +56,5 @@
 	"shippingAddressCountry" : "",
 	"customerVatNumber" : "",
 	"addonIds" : "",
-	"addonsQuantity" : "",
+	"addonsQuantity" : ""
 }

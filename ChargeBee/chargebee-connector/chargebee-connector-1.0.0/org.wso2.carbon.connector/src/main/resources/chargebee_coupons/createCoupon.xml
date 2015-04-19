@@ -54,13 +54,7 @@
       <property name="uri.var.maxRedemptions" expression="$func:maxRedemptions" />
       <property name="uri.var.invoiceNotes" expression="$func:invoiceNotes" />
       <payloadFactory media-type="json">
-         <format>
-            {
-               "id": "$1",
-               "name": "$2",
-               "discount_type":"$3",
-               "apply_on":"$4"
-            }
+         <format> { "id": "$1", "name": "$2", "discount_type":"$3", "apply_on":"$4" }
          </format>
          <args>
             <arg expression="get-property('uri.var.couponId')" />
@@ -128,7 +122,7 @@
             mc.setPayloadJSON(payload);
          ]]>
       </script>
-      <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2"/>
+      <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2" />
       <call>
          <endpoint>
             <http method="post" uri-template="{uri.var.apiUrl}/coupons" />

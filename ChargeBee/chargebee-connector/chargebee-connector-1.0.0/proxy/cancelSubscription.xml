@@ -1,19 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_cancelSubscription" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
-	<target>
-		<inSequence>
-								<property name="subscriptionId" expression="json-eval($.subscriptionId)" />
-											<property name="endOfTerm" expression="json-eval($.endOfTerm)" />
-								<chargebee.cancelSubscription>
-							<subscriptionId>{$ctx:subscriptionId}</subscriptionId>
-							<endOfTerm>{$ctx:endOfTerm}</endOfTerm>
-						</chargebee.cancelSubscription>
-			<respond />
-		</inSequence>
-		<outSequence>
-			<log />
-			<send />
-		</outSequence>
-	</target>
-	<description />
-</proxy>  
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_cancelSubscription" transports="https,http"
+   statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <inSequence>
+         <property name="apiUrl" expression="json-eval($.apiUrl)" />
+         <property name="apiKey" expression="json-eval($.apiKey)" />
+         <property name="subscriptionId" expression="json-eval($.subscriptionId)" />
+         <property name="isEndOfTerm" expression="json-eval($.isEndOfTerm)" />
+         <chargebee.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <apiKey>{$ctx:apiKey}</apiKey>
+         </chargebee.init>
+         <chargebee.cancelSubscription>
+            <subscriptionId>{$ctx:subscriptionId}</subscriptionId>
+            <isEndOfTerm>{$ctx:isEndOfTerm}</isEndOfTerm>
+         </chargebee.cancelSubscription>
+         <respond />
+      </inSequence>
+      <outSequence>
+         <log />
+         <send />
+      </outSequence>
+   </target>
+   <description />
+</proxy>
