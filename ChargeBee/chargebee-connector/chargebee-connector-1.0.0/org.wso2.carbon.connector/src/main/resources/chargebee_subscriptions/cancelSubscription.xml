@@ -22,8 +22,8 @@
    <parameter name="isEndOfTerm"
       description="The boolean flag indicating the cancellation is done at the end of the term." />
    <sequence>
-      <property expression="$func:subscriptionId" name="uri.var.subscriptionId" />
-      <property expression="$func:isEndOfTerm" name="uri.var.isEndOfTerm" />
+      <property name="uri.var.subscriptionId" expression="$func:subscriptionId" />
+      <property name="uri.var.isEndOfTerm" expression="$func:isEndOfTerm" />
       <property name="uri.var.apiParameters" value="" />
       <filter xpath="boolean(get-property('uri.var.isEndOfTerm'))">
          <then>

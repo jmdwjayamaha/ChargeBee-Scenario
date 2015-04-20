@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_getSubscription" transports="https,http"
-   statistics="disable" trace="disable" startOnLoad="true">
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="chargebee_getSubscription"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
    <target>
       <inSequence>
-         <property name="apiUrl" expression="json-eval($.apiUrl)" />
-         <property name="apiKey" expression="json-eval($.apiKey)" />
-         <property name="subscriptionId" expression="json-eval($.subscriptionId)" />
+         <property name="apiUrl" expression="json-eval($.apiUrl)"/>
+         <property name="apiKey" expression="json-eval($.apiKey)"/>
+         <property name="subscriptionId" expression="json-eval($.subscriptionId)"/>
          <chargebee.init>
             <apiUrl>{$ctx:apiUrl}</apiUrl>
             <apiKey>{$ctx:apiKey}</apiKey>
@@ -13,12 +17,13 @@
          <chargebee.getSubscription>
             <subscriptionId>{$ctx:subscriptionId}</subscriptionId>
          </chargebee.getSubscription>
-         <respond />
+         <respond/>
       </inSequence>
       <outSequence>
-         <log />
-         <send />
+         <log/>
+         <send/>
       </outSequence>
    </target>
-   <description />
+   <description/>
 </proxy>
+                                

@@ -28,14 +28,15 @@
          <property name="shippingAddressState" expression="json-eval($.shippingAddressState)" />
          <property name="shippingAddressZip" expression="json-eval($.shippingAddressZip)" />
          <property name="shippingAddressCountry" expression="json-eval($.shippingAddressCountry)" />
-         <property name="addonIds" expression="json-eval($.addonIds)" />
-         <property name="addonsQuantity" expression="json-eval($.addonsQuantity)" />
+         <property name="addonDetails" expression="json-eval($.addonDetails)" />
+         <!-- <property name="addonIds" expression="json-eval($.addonIds)" />
+         <property name="addonsQuantity" expression="json-eval($.addonsQuantity)" /> -->
          <chargebee.init>
             <apiUrl>{$ctx:apiUrl}</apiUrl>
             <apiKey>{$ctx:apiKey}</apiKey>
          </chargebee.init>
          <chargebee.createSubscriptionForCustomer>
-            <customerId>{$cts:customerId}</customerId>
+            <customerId>{$ctx:customerId}</customerId>
             <subscriptionId>{$ctx:subscriptionId}</subscriptionId>
             <planId>{$ctx:planId}</planId>
             <planQuantity>{$ctx:planQuantity}</planQuantity>
@@ -58,8 +59,9 @@
             <shippingAddressState>{$ctx:shippingAddressState}</shippingAddressState>
             <shippingAddressZip>{$ctx:shippingAddressZip}</shippingAddressZip>
             <shippingAddressCountry>{$ctx:shippingAddressCountry}</shippingAddressCountry>
-            <addonIds>{$ctx:addonIds}</addonIds>
-            <addonsQuantity>{$ctx:addonsQuantity}</addonsQuantity>
+            <addonDetails>{$ctx:addonDetails}</addonDetails>
+            <!-- <addonIds>{$ctx:addonIds}</addonIds>
+            <addonsQuantity>{$ctx:addonsQuantity}</addonsQuantity> -->
          </chargebee.createSubscriptionForCustomer>
          <respond />
       </inSequence>

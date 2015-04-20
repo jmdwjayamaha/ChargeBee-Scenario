@@ -20,7 +20,13 @@
 <template name="getSubscription" xmlns="http://ws.apache.org/ns/synapse">
    <parameter name="subscriptionId" description="The unique identifier of a subscription." />
    <sequence>
-      <property expression="$func:subscriptionId" name="uri.var.subscriptionId" />
+      <property name="uri.var.subscriptionId" expression="$func:subscriptionId" />
+      <script language="js">
+         <![CDATA[
+            var subscriptionId = encodeURIComponent(mc.getProperty('uri.var.subscriptionId'));
+            mc.setProperty('uri.var.subscriptionId', subscriptionId);
+         ]]>
+      </script>
       <call>
          <endpoint>
             <http method="get" uri-template="{uri.var.apiUrl}/subscriptions/{uri.var.subscriptionId}" />

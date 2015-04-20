@@ -1,8 +1,9 @@
 {
-	"limit" : "",
-	"offset" : "",
-	"startTime" : "",
-	"endTime" : "",
-	"webhookStatus" : "",
-	"eventType" : "",
+   "apiUrl" : "https://macsoft-test.chargebee.com",
+   "apiKey" : "test_ybnKmnXwuNLVDBMeMTr8Wlk8chDav3r6",
+   "limit"  : "5",
+   "startTime" :"1429523740",
+   "endTime" :"1429523740",
+   "webhookStatus" :"not_configured",
+   "eventType":"customer_created"
 }

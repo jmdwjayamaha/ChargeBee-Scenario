@@ -31,47 +31,47 @@
    <parameter name="invoiceNotes" description="The notes for the invoice." />
    <parameter name="cardGateway" description="The name of the gateway for the card." />
    <parameter name="cardTmpToken" description="The single use card token." />
-   <parameter name="cardFirstName" description="The cardFirstName" />
-   <parameter name="cardLastName" description="The cardLastName" />
-   <parameter name="cardNumber" description="The cardNumber" />
-   <parameter name="cardExpiryMonth" description="The cardExpiryMonth" />
-   <parameter name="cardExpiryYear" description="The cardExpiryYear" />
-   <parameter name="cardCVV" description="The cardCVV" />
-   <parameter name="cardBillingAddress1" description="The cardBillingAddress1" />
-   <parameter name="cardBillingAddress2" description="The cardBillingAddress2" />
-   <parameter name="cardBillingCity" description="The cardBillingCity" />
-   <parameter name="cardBillingStateCode" description="The cardBillingStateCode" />
-   <parameter name="cardBillingState" description="The cardBillingState" />
-   <parameter name="cardBillingZip" description="The cardBillingZip" />
-   <parameter name="cardBillingCountry" description="The cardBillingCountry" />
-   <parameter name="cardIpAddress" description="The cardIpAddress" />
-   <parameter name="billingAddressFirstName" description="The billingAddressFirstName" />
-   <parameter name="billingAddressLastName" description="The billingAddressLastName" />
-   <parameter name="billingAddressEmail" description="The billingAddressEmail" />
-   <parameter name="billingAddressCompanyName" description="The billingAddressCompanyName" />
-   <parameter name="billingAddressPhoneNumber" description="The billingAddressPhoneNumber" />
-   <parameter name="billingAddressLine1" description="The billingAddressLine1" />
-   <parameter name="billingAddressLine2" description="The billingAddressLine2" />
-   <parameter name="billingAddressLine3" description="The billingAddressLine3" />
-   <parameter name="billingAddressCity" description="The billingAddressCity" />
-   <parameter name="billingAddressStateCode" description="The billingAddressStateCode" />
-   <parameter name="billingAddressState" description="The billingAddressState" />
-   <parameter name="billingAddressZip" description="The billingAddressZip" />
-   <parameter name="billingAddressCountry" description="The billingAddressCountry" />
-   <parameter name="shippingAddressFirstName" description="The shippingAddressFirstName" />
-   <parameter name="shippingAddressLastName" description="The shippingAddressLastName" />
-   <parameter name="shippingAddressEmail" description="The shippingAddressEmail" />
-   <parameter name="shippingAddressCompanyName" description="The shippingAddressCompanyName" />
-   <parameter name="shippingAddressPhoneNumber" description="The shippingAddressPhoneNumber" />
-   <parameter name="shippingAddressLine1" description="The shippingAddressLine1" />
-   <parameter name="shippingAddressLine2" description="The shippingAddressLine2" />
-   <parameter name="shippingAddressLine3" description="The shippingAddressLine3" />
-   <parameter name="shippingAddressCity" description="The shippingAddressCity" />
-   <parameter name="shippingAddressStateCode" description="The shippingAddressStateCode" />
-   <parameter name="shippingAddressState" description="The shippingAddressState" />
-   <parameter name="shippingAddressZip" description="The shippingAddressZip" />
-   <parameter name="shippingAddressCountry" description="The shippingAddressCountry" />
-   <parameter name="customerVatNumber" description="The customerVatNumber" />
+   <parameter name="cardFirstName" description="The first name of the card holder." />
+   <parameter name="cardLastName" description="The last name of the card holder." />
+   <parameter name="cardNumber" description="The credit card number without any formatting." />
+   <parameter name="cardExpiryMonth" description="The card expiry month." />
+   <parameter name="cardExpiryYear" description="The card expiry year." />
+   <parameter name="cardCVV" description="The card verification value." />
+   <parameter name="cardBillingAddress1" description="The card billing address line1." />
+   <parameter name="cardBillingAddress2" description="The card billing address line2." />
+   <parameter name="cardBillingCity" description="The card billing address city." />
+   <parameter name="cardBillingStateCode" description="The The card billing address state code." />
+   <parameter name="cardBillingState" description="The card billing address state." />
+   <parameter name="cardBillingZip" description="The The card billing address zip or postal code." />
+   <parameter name="cardBillingCountry" description="The card billing address country." />
+   <parameter name="cardIpAddress" description="The IP address from where the payment method is created or updated." />
+   <parameter name="billingAddressFirstName" description="The billing address first name." />
+   <parameter name="billingAddressLastName" description="The billing address last name." />
+   <parameter name="billingAddressEmail" description="The billing address email." />
+   <parameter name="billingAddressCompanyName" description="The billing address company name." />
+   <parameter name="billingAddressPhoneNumber" description="The billing address phone number." />
+   <parameter name="billingAddressLine1" description="The billing address line1." />
+   <parameter name="billingAddressLine2" description="The billing address line2." />
+   <parameter name="billingAddressLine3" description="The billing address line3." />
+   <parameter name="billingAddressCity" description="The billing address city." />
+   <parameter name="billingAddressStateCode" description="The billing address state code." />
+   <parameter name="billingAddressState" description="The billing address state." />
+   <parameter name="billingAddressZip" description="The billing address zip or postal code." />
+   <parameter name="billingAddressCountry" description="The billing address country." />
+   <parameter name="shippingAddressFirstName" description="The shipping address first name." />
+   <parameter name="shippingAddressLastName" description="The shipping address last name." />
+   <parameter name="shippingAddressEmail" description="The shipping address email." />
+   <parameter name="shippingAddressCompanyName" description="The shipping address company name." />
+   <parameter name="shippingAddressPhoneNumber" description="The shipping address phone number." />
+   <parameter name="shippingAddressLine1" description="The shipping address line1." />
+   <parameter name="shippingAddressLine2" description="The shipping address line2." />
+   <parameter name="shippingAddressLine3" description="The shipping address line3." />
+   <parameter name="shippingAddressCity" description="The shipping address city." />
+   <parameter name="shippingAddressStateCode" description="The shipping address state code." />
+   <parameter name="shippingAddressState" description="The shipping address state." />
+   <parameter name="shippingAddressZip" description="The shipping address zip or postal code." />
+   <parameter name="shippingAddressCountry" description="The shipping address country." />
+   <parameter name="customerVatNumber" description="The VAT number for the customer." />
    <parameter name="addonIds" description="The addonIds" />
    <parameter name="addonsQuantity" description="The addonsQuantity" />
    <sequence>

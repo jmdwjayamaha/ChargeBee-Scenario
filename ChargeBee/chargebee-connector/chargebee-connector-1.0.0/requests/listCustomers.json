@@ -1,4 +1,5 @@
 {
-	"limit" : "",
-	"offset" : "",
+   "apiUrl" : "https://macsoft-test.chargebee.com",
+   "apiKey" : "test_ybnKmnXwuNLVDBMeMTr8Wlk8chDav3r6",
+   "limit"  : "2"
 }

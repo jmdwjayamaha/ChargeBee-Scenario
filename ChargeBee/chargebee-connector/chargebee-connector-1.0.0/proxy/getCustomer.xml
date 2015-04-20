@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_getCustomer" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
-	<target>
-		<inSequence>
-								<property name="customerId" expression="json-eval($.customerId)" />
-								<chargebee.getCustomer>
-							<customerId>{$ctx:customerId}</customerId>
-						</chargebee.getCustomer>
-			<respond />
-		</inSequence>
-		<outSequence>
-			<log />
-			<send />
-		</outSequence>
-	</target>
-	<description />
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_getCustomer" transports="https,http" statistics="disable"
+   trace="disable" startOnLoad="true">
+   <target>
+      <inSequence>
+         <property name="apiUrl" expression="json-eval($.apiUrl)" />
+         <property name="apiKey" expression="json-eval($.apiKey)" />
+         <property name="customerId" expression="json-eval($.customerId)" />
+         <chargebee.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <apiKey>{$ctx:apiKey}</apiKey>
+         </chargebee.init>
+         <chargebee.getCustomer>
+            <customerId>{$ctx:customerId}</customerId>
+         </chargebee.getCustomer>
+         <respond />
+      </inSequence>
+      <outSequence>
+         <log />
+         <send />
+      </outSequence>
+   </target>
+   <description />
 </proxy>  

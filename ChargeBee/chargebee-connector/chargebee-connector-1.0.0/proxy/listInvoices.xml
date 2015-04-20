@@ -1,21 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_listInvoices" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
-	<target>
-		<inSequence>
-								<property name="limit" expression="json-eval($.limit)" />
-											<property name="offset" expression="json-eval($.offset)" />
-											<property name="paidOnAfter" expression="json-eval($.paidOnAfter)" />
-								<chargebee.listInvoices>
-							<limit>{$ctx:limit}</limit>
-							<offset>{$ctx:offset}</offset>
-							<paidOnAfter>{$ctx:paidOnAfter}</paidOnAfter>
-						</chargebee.listInvoices>
-			<respond />
-		</inSequence>
-		<outSequence>
-			<log />
-			<send />
-		</outSequence>
-	</target>
-	<description />
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_listInvoices" transports="https,http" statistics="disable"
+   trace="disable" startOnLoad="true">
+   <target>
+      <inSequence>
+         <property name="apiUrl" expression="json-eval($.apiUrl)" />
+         <property name="apiKey" expression="json-eval($.apiKey)" />
+         <property name="limit" expression="json-eval($.limit)" />
+         <property name="offset" expression="json-eval($.offset)" />
+         <property name="paidOnAfter" expression="json-eval($.paidOnAfter)" />
+         <chargebee.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <apiKey>{$ctx:apiKey}</apiKey>
+         </chargebee.init>
+         <chargebee.listInvoices>
+            <limit>{$ctx:limit}</limit>
+            <offset>{$ctx:offset}</offset>
+            <paidOnAfter>{$ctx:paidOnAfter}</paidOnAfter>
+         </chargebee.listInvoices>
+         <respond />
+      </inSequence>
+      <outSequence>
+         <log />
+         <send />
+      </outSequence>
+   </target>
+   <description />
 </proxy>  

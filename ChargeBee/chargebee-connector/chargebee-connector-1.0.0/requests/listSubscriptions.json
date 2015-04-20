@@ -1,6 +1,6 @@
 {
    "apiUrl" : "https://virasoft-test.chargebee.com",
    "apiKey" : "test_FcdtRk15eZMFlv0yz5VSjcdNBukdmriWsW",
-	"limit" : "10",
-	"offset" : "0"
+   "limit" : "2",
+   "offset" : ["NEW_SRT","1427708547000","1036130"]
 }
