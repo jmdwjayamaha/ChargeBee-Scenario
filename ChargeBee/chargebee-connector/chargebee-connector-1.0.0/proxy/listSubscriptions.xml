@@ -6,7 +6,7 @@
        trace="disable"
        startOnLoad="true">
    <target>
-      <inSequence>
+      <inSequence onError="faultHandlerSeq">
          <property name="apiUrl" expression="json-eval($.apiUrl)"/>
          <property name="apiKey" expression="json-eval($.apiKey)"/>
          <property name="limit" expression="json-eval($.limit)"/>

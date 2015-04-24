@@ -2,5 +2,6 @@
    "apiUrl" : "https://macsoft-test.chargebee.com",
    "apiKey" : "test_ybnKmnXwuNLVDBMeMTr8Wlk8chDav3r6",
    "paidOnAfter" : "1423226061",
-   "limit" : "3"
+   "limit" : "3",
+   "offset":""
 }

@@ -26,7 +26,7 @@
    <parameter name="trialEndDate" description="The end date of a trial subscription in UTC timestamp." />
    <parameter name="billingCycles" description="The number of cycles this subscription should be charged." />
    <parameter name="couponId" description="The unique identifier of a coupon." />
-   <parameter name="pONumber" description="The purchase order number." />
+   <parameter name="purchaseOrderNumber" description="The purchase order number." />
    <parameter name="invoiceNotes" description="The notes to be added to the invoice." />
    <parameter name="shippingAddressFirstName" description="The first name of the shipping address." />
    <parameter name="shippingAddressLastName" description="The last name of the shipping address." />
@@ -51,7 +51,7 @@
       <property name="uri.var.trialEndDate" expression="$func:trialEndDate" />
       <property name="uri.var.billingCycles" expression="$func:billingCycles" />
       <property name="uri.var.couponId" expression="$func:couponId" />
-      <property name="uri.var.pONumber" expression="$func:pONumber" />
+      <property name="uri.var.purchaseOrderNumber" expression="$func:purchaseOrderNumber" />
       <property name="uri.var.invoiceNotes" expression="$func:invoiceNotes" />
       <property name="uri.var.shippingAddressFirstName" expression="$func:shippingAddressFirstName" />
       <property name="uri.var.shippingAddressLastName" expression="$func:shippingAddressLastName" />
@@ -77,7 +77,7 @@
             var trialEndDate = mc.getProperty('uri.var.trialEndDate');
             var billingCycles = mc.getProperty('uri.var.billingCycles');
             var couponId = mc.getProperty('uri.var.couponId');
-            var pONumber = mc.getProperty('uri.var.pONumber');
+            var purchaseOrderNumber = mc.getProperty('uri.var.purchaseOrderNumber');
             var invoiceNotes = mc.getProperty('uri.var.invoiceNotes');
             var shippingAddressFirstName = mc.getProperty('uri.var.shippingAddressFirstName');
             var shippingAddressLastName = mc.getProperty('uri.var.shippingAddressLastName');
@@ -96,7 +96,6 @@
             // URI Encode the customerId parameter
             customerId = encodeURIComponent(customerId);
             mc.setProperty('uri.var.customerId', customerId);
-            var payload = mc.getPayloadJSON();
             // Add the addon details parameter containing both addon Ids an the addon quantities
             // Since the paramters contain multiple occurrences directly add to the payload
             if (addonDetails != null && addonDetails != "") {
@@ -129,8 +128,8 @@
             if (couponId != null && couponId != "") {
                payload.coupon = couponId;
             }
-            if (pONumber != null && pONumber != "") {
-               payload.po_number = pONumber;
+            if (purchaseOrderNumber != null && purchaseOrderNumber != "") {
+               payload.po_number = purchaseOrderNumber;
             }
             if (invoiceNotes != null && invoiceNotes != "") {
                payload.invoice_notes = invoiceNotes;
@@ -183,5 +182,7 @@
             <http method="post" uri-template="{uri.var.apiUrl}/customers/{uri.var.customerId}/subscriptions" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

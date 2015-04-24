@@ -1,0 +1,728 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Review id="billiving">
+  <ReviewIssue id="I8PGHVKN">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:12:54:743 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 16:02:23:210 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="1">src/main/resources/connector.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Add license header</Summary>
+    <Description>license header added</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGIS4N">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:13:36:935 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 16:01:51:092 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="1">src/main/resources/billiving-invoice/component.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add license header</Summary>
+    <Description>add license header
+
+license header added</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGJ76N">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:13:56:447 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 16:00:59:559 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="1">src/main/resources/billiving-config/component.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add license header</Summary>
+    <Description>add license header
+
+license header added</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGQG57">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:19:34:651 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 16:00:15:850 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="2">src/main/resources/billiving-invoice/component.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add license header</Summary>
+    <Description>add license header
+
+license header added</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGR5AY">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:20:07:258 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:59:35:877 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="34">src/main/resources/billiving-client/createClient.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGRRM0">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:20:36:168 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:59:19:750 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="38">src/main/resources/billiving-client/createClient.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGVLIT">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:23:34:901 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:58:16:306 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="41">src/main/resources/billiving-client/createClient.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PGVPPJ">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:23:40:327 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:56:16:377 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="42">src/main/resources/billiving-client/createClient.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHQVEI">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:47:54:042 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:41:10:076 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="21">src/main/resources/billiving-client/listClients.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHRHE8">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:48:22:544 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:40:53:965 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="25">src/main/resources/billiving-client/listClients.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHROWY">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:48:32:290 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:40:38:134 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="26">src/main/resources/billiving-client/listClients.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHRUCU">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:48:39:342 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:40:21:023 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="27">src/main/resources/billiving-client/listClients.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHS5H9">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:48:53:757 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:40:00:584 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="29">src/main/resources/billiving-client/listClients.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHT3SC">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:49:38:220 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:34:57:729 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="53">src/main/resources/billiving-client/listClients.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>What will happen if passed value with spaces</Summary>
+    <Description>if necessary add URLEncoding
+
+Encoded the URL</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHXD9K">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:52:57:128 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:33:41:773 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="31">src/main/resources/billiving-config/init.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add default API Url</Summary>
+    <Description>add default API URL if available 
+
+Add a default API URL</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHY29A">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:53:29:518 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:27:07:576 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="23">src/main/resources/billiving-invoice/createInvoice.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description </Summary>
+    <Description>add meaningfull description 
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PHYD4L">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 11:53:43:605 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:21:26:619 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="24">src/main/resources/billiving-invoice/createInvoice.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description </Summary>
+    <Description>add meaningfull description 
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PI81DG">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 12:01:14:932 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:15:55:964 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="27">src/main/resources/billiving-invoice/createInvoice.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PIISPI">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 12:09:36:918 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:08:44:991 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="25">src/main/resources/billiving-invoice/listInvoices.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add meaningfull description</Summary>
+    <Description>add meaningfull description. Check all parameters and update.
+
+Done</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PIN42O">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 12:12:58:272 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 14:55:39:969 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="105">src/main/resources/billiving-invoice/listInvoices.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Check for values with spaces</Summary>
+    <Description>encode URL if necessary.
+
+encode the URL</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PIR884">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 12:16:10:276 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 15:25:33:932 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="24">src/main/resources/billiving-invoice/createInvoice.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>change paramater name to menaingfull name</Summary>
+    <Description>dueDate or dueAmount which applicable
+
+Changed the parameter name to dueDays</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PISIBF">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 12:17:10:011 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 13:24:38:698 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="35">src/main/resources/billiving-invoice/createInvoice.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>uri of what?</Summary>
+    <Description>change to proper parametr name
+
+Changed the parameter to invoiceURI</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8PJY8B3">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 12:49:36:591 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-20 :: 13:27:20:264 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="9">src/main/resources/connector.xml</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>add default icon</Summary>
+    <Description>add default icon
+
+Default icon added</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.resolved</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R8XIC5">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:16:39:509 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:17:41:413 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="85">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>No need to assert clientId</Summary>
+    <Description>Since we are retriving by clientId no need for asserting that. Instead of that assert created date only if available in response.</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R900II">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:18:36:378 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:20:02:555 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="107">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Assert atleast five optional parameters</Summary>
+    <Description>For optional parameters assert atlease 5 optional params only if available. Otherwise assert maximaum number of params.</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R92EBG">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:20:27:580 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:22:14:018 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="125">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Assert aginst responses</Summary>
+    <Description>instead of asserting hardcoded values, check with two responses. Assert message also only if available</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R95OX6">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:23:01:290 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:25:16:337 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="114">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Remove unwanted dependencies</Summary>
+    <Description>Since negative case  not depends on create method remove dependency. Update this for all methods where it applicable.</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R99596">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:25:42:426 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:25:57:164 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="152">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary></Summary>
+    <Description></Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R99JI6">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:26:00:894 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:27:06:455 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="152">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Remove invalid test case</Summary>
+    <Description>Since request is sending to invalid URL this is not negative test case. Remove this.</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9C6NO">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:28:04:212 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:28:54:897 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="190">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Assert length</Summary>
+    <Description>For list methods assert number of clients returend in response also.</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9DO8F">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:29:13:647 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:30:54:365 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="216">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Add atlease five optional parameters </Summary>
+    <Description>Add atlease five optional parameters only if available</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9JMTQ">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:33:51:758 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:34:20:065 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="288">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Create test case with atleast 5 optional paramaters</Summary>
+    <Description>Create test case with atleast 5 optional paramaters</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9KLA8">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:34:36:416 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:34:38:792 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="306">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary></Summary>
+    <Description></Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9KSTE">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:34:46:178 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:35:16:098 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="306">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Assert against api responses</Summary>
+    <Description>Assert against api responses, not with hardcoded values</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9LWQS">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:35:37:924 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:35:53:236 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="333">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Unwanted test case </Summary>
+    <Description>Unwanted test case remove</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9MI4M">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:36:05:638 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:40:47:284 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="371">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Assert response length also</Summary>
+    <Description>Assert response length also</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9SY4Z">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:41:06:323 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:41:33:417 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="397">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Use atleast five optional parameters</Summary>
+    <Description>Use atleast five optional parameters</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8R9UY3N">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:42:39:587 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:42:51:745 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="40">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Make varibale as final</Summary>
+    <Description>Make varibale as final</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8RA23QO">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:48:13:488 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:59:47:753 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="34">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary>Assert responses in following way</Summary>
+    <Description>connector property + api response = Assert.assertEquals(connector, api)
+api response + esb response =  Assert.assertEquals(api, esb)</Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+  <ReviewIssue id="I8RACZMV">
+    <ReviewIssueMeta>
+      <CreationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:56:41:383 IST</CreationDate>
+      <LastModificationDate format="yyyy-MM-dd :: HH:mm:ss:SSS z">2015-04-21 :: 17:56:43:485 IST</LastModificationDate>
+    </ReviewIssueMeta>
+    <ReviewerId>Janaka</ReviewerId>
+    <AssignedTo>Janaka</AssignedTo>
+    <File line="34">src/test/java/org/wso2/carbon/connector/integration/test/billiving/BillivingConnectorIntegrationTest.java</File>
+    <Type>item.label.unset</Type>
+    <Severity>item.label.unset</Severity>
+    <Summary></Summary>
+    <Description></Description>
+    <Annotation></Annotation>
+    <Revision></Revision>
+    <Resolution>item.label.unset</Resolution>
+    <Status>item.status.label.open</Status>
+  </ReviewIssue>
+</Review>

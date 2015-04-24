@@ -1,0 +1,6 @@
+{
+"apiUrl": "%s(apiUrl)",
+"accessToken": "%s(accessToken)",
+"email":"%s(clientEmail)",
+"telephone1":"%s(telephoneNumber)"
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="billiving_createInvoice"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+   <target>
+      <inSequence onError="faultHandlerSeq">
+         <property name="apiUrl" expression="json-eval($.apiUrl)"/>
+         <property name="accessToken" expression="json-eval($.accessToken)"/>
+         <property name="referenceNumber" expression="json-eval($.referenceNumber)"/>
+         <property name="discount" expression="json-eval($.discount)"/>
+         <property name="shipping" expression="json-eval($.shipping)"/>
+         <property name="dueDays" expression="json-eval($.dueDays)"/>
+         <property name="clientNotes" expression="json-eval($.clientNotes)"/>
+         <property name="internalNotes" expression="json-eval($.internalNotes)"/>
+         <property name="docItems" expression="json-eval($.docItems)"/>
+         <property name="bankAccountId" expression="json-eval($.bankAccountId)"/>
+         <property name="clientId" expression="json-eval($.clientId)"/>
+         <property name="id" expression="json-eval($.id)"/>
+         <property name="currencyId" expression="json-eval($.currencyId)"/>
+         <property name="languageId" expression="json-eval($.languageId)"/>
+         <property name="issueDate" expression="json-eval($.issueDate)"/>
+         <property name="companyId" expression="json-eval($.companyId)"/>
+         <property name="invoiceURI" expression="json-eval($.invoiceURI)"/>
+         <billiving.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+         </billiving.init>
+         <billiving.createInvoice>
+            <currencyId>{$ctx:currencyId}</currencyId>
+            <referenceNumber>{$ctx:referenceNumber}</referenceNumber>
+            <issueDate>{$ctx:issueDate}</issueDate>
+            <clientNotes>{$ctx:clientNotes}</clientNotes>
+            <invoiceURI>{$ctx:invoiceURI}</invoiceURI>
+            <languageId>{$ctx:languageId}</languageId>
+            <clientId>{$ctx:clientId}</clientId>
+            <discount>{$ctx:discount}</discount>
+            <id>{$ctx:id}</id>
+            <shipping>{$ctx:shipping}</shipping>
+            <internalNotes>{$ctx:internalNotes}</internalNotes>
+            <dueDays>{$ctx:dueDays}</dueDays>
+            <companyId>{$ctx:companyId}</companyId>
+            <bankAccountId>{$ctx:bankAccountId}</bankAccountId>
+            <docItems>{$ctx:docItems}</docItems>
+         </billiving.createInvoice>
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <description/>
+</proxy>
+                                

@@ -18,20 +18,21 @@
 -->
 <!-- API Doc: https://apidocs.chargebee.com/docs/api/plans#retrieve_a_plan -->
 <template name="getPlan" xmlns="http://ws.apache.org/ns/synapse">
-	<parameter name="planId"
-		description="The specific plan identifier to retrieve the plan details" />
-	<sequence>
-		<property name="uri.var.planId" expression="$func:planId" />
-		<script language="js">
-			<![CDATA[
-			   var planId = encodeURIComponent(mc.getProperty('uri.var.planId'));
-			   mc.setProperty('uri.var.planId', planId);
-			]]>
-		</script>
-		<call>
-			<endpoint>
-				<http method="get" uri-template="{uri.var.apiUrl}/plans/{uri.var.planId}" />
-			</endpoint>
-		</call>
-	</sequence>
+   <parameter name="planId" description="The specific plan identifier to retrieve the plan details." />
+   <sequence>
+      <property name="uri.var.planId" expression="$func:planId" />
+      <script language="js">
+      <![CDATA[
+         var planId = encodeURIComponent(mc.getProperty('uri.var.planId'));
+         mc.setProperty('uri.var.planId', planId);
+      ]]>
+      </script>
+      <call>
+         <endpoint>
+            <http method="get" uri-template="{uri.var.apiUrl}/plans/{uri.var.planId}" />
+         </endpoint>
+      </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
+   </sequence>
 </template>

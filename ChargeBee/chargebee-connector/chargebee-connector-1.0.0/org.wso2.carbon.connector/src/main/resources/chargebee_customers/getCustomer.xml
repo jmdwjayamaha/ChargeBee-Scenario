@@ -16,6 +16,7 @@
    specific language governing permissions and limitations
    under the License.
 -->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/customers#retrieve_a_customer -->
 <template name="getCustomer" xmlns="http://ws.apache.org/ns/synapse">
    <parameter name="customerId" description="The specific customer identifier to retrieve the customer details." />
    <sequence>
@@ -31,5 +32,7 @@
             <http method="get" uri-template="{uri.var.apiUrl}/customers/{uri.var.customerId}" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

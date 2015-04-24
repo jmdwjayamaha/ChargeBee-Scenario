@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="billiving_listInvoices"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+   <target>
+      <inSequence onError="faultHandlerSeq">
+         <property name="apiUrl" expression="json-eval($.apiUrl)"/>
+         <property name="accessToken" expression="json-eval($.accessToken)"/>
+         <property name="organizationName" expression="json-eval($.organizationName)"/>
+         <property name="vendorName" expression="json-eval($.vendorName)"/>
+         <property name="id" expression="json-eval($.id)"/>
+         <property name="refNo" expression="json-eval($.refNo)"/>
+         <property name="dateFrom" expression="json-eval($.dateFrom)"/>
+         <property name="dateTo" expression="json-eval($.dateTo)"/>
+         <property name="status" expression="json-eval($.status)"/>
+         <property name="payStatus" expression="json-eval($.payStatus)"/>
+         <property name="companyId" expression="json-eval($.companyId)"/>
+         <property name="skip" expression="json-eval($.skip)"/>
+         <property name="top" expression="json-eval($.top)"/>
+         <property name="orderBy" expression="json-eval($.orderBy)"/>
+         <property name="count" expression="json-eval($.count)"/>
+         <property name="fileType" expression="json-eval($.fileType)"/>
+         <property name="freeText" expression="json-eval($.freeText)"/>
+         <property name="from" expression="json-eval($.from)"/>
+         <property name="to" expression="json-eval($.to)"/>
+         <billiving.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+         </billiving.init>
+         <billiving.listInvoices>
+            <fileType>{$ctx:fileType}</fileType>
+            <count>{$ctx:count}</count>
+            <orderBy>{$ctx:orderBy}</orderBy>
+            <vendorName>{$ctx:vendorName}</vendorName>
+            <organizationName>{$ctx:organizationName}</organizationName>
+            <status>{$ctx:status}</status>
+            <dateTo>{$ctx:dateTo}</dateTo>
+            <skip>{$ctx:skip}</skip>
+            <id>{$ctx:id}</id>
+            <payStatus>{$ctx:payStatus}</payStatus>
+            <refNo>{$ctx:refNo}</refNo>
+            <companyId>{$ctx:companyId}</companyId>
+            <dateFrom>{$ctx:dateFrom}</dateFrom>
+            <top>{$ctx:top}</top>
+            <freeText>{$ctx:freeText}</freeText>
+            <from>{$ctx:from}</from>
+            <to>{$ctx:to}</to>
+         </billiving.listInvoices>
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <description/>
+</proxy>
+                                

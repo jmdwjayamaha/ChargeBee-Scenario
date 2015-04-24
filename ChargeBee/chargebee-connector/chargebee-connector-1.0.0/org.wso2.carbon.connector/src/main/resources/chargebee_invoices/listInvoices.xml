@@ -16,6 +16,7 @@
    specific language governing permissions and limitations
    under the License.
 -->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/invoices#list_invoices -->
 <template name="listInvoices" xmlns="http://ws.apache.org/ns/synapse">
    <parameter name="paidOnAfter"
       description="The timestamp(UTC) value in seconds to return only the invoices that got paid at/after this time. " />
@@ -26,31 +27,36 @@
       <property name="uri.var.offset" expression="$func:offset" />
       <property name="uri.var.paidOnAfter" expression="$func:paidOnAfter" />
       <property name="uri.var.apiParameters" value="" />
-      <script language="js">
-      <![CDATA[
-         var limit = mc.getProperty('uri.var.limit');
-         var offset = mc.getProperty('uri.var.offset');
-         var paidOnAfter = mc.getProperty('uri.var.paidOnAfter');
-         var apiParameters = mc.getProperty('uri.var.apiParameters');
-         if (limit != null && limit != "") {
-            apiParameters += "limit=" + limit + '&';
-         }
-         if (offset != null && offset != "") {
-            apiParameters += "offset=" + offset + '&';
-         }
-         if (paidOnAfter != null && paidOnAfter != "") {
-            apiParameters += "paid_on_after=" + paidOnAfter + '&';
-         }
-         if (apiParameters != "") {
-            apiParameters = '?' + apiParameters.substring(0, apiParameters.length - 1);
-            mc.setProperty('uri.var.apiParameters', apiParameters);
-         } 
-         ]]>
-      </script>
+      <filter xpath="boolean(get-property('uri.var.limit'))">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat(get-property('uri.var.apiParameters'),'limit=',get-property('uri.var.limit'), '&amp;')" />
+         </then>
+      </filter>
+      <filter xpath="boolean(get-property('uri.var.paidOnAfter'))">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat(get-property('uri.var.apiParameters'),'paid_on_after=',get-property('uri.var.paidOnAfter'), '&amp;')" />
+         </then>
+      </filter>
+      <filter xpath="boolean(get-property('uri.var.offset'))">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat(get-property('uri.var.apiParameters'),'offset=',get-property('uri.var.offset'), '&amp;')" />
+         </then>
+      </filter>
+      <filter xpath="fn:string-length(get-property('uri.var.apiParameters')) > 0">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat('?', fn:substring(get-property('uri.var.apiParameters'), 1, fn:string-length(get-property('uri.var.apiParameters'))-1))" />
+         </then>
+      </filter>
       <call>
          <endpoint>
             <http method="get" uri-template="{uri.var.apiUrl}/invoices{uri.var.apiParameters}" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

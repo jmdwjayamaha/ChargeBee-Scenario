@@ -18,34 +18,36 @@
 -->
 <!-- API Doc: https://apidocs.chargebee.com/docs/api/plans#list_plans -->
 <template name="listPlans" xmlns="http://ws.apache.org/ns/synapse">
-	<parameter name="limit" description="The number of results per page." />
-	<parameter name="offset" description="The offset value for pagination." />
-	<sequence>
-		<property name="uri.var.limit" expression="$func:limit" />
-		<property name="uri.var.offset" expression="$func:offset" />
-		<property name="uri.var.apiParameters" value="" />
-		<filter xpath="boolean(get-property('uri.var.limit'))">
-			<then>
-				<property name="uri.var.apiParameters"
-					expression="fn:concat(get-property('uri.var.apiParameters'),'limit=',get-property('uri.var.limit'), '&amp;')" />
-			</then>
-		</filter>
-		<filter xpath="boolean(get-property('uri.var.offset'))">
-			<then>
-				<property name="uri.var.apiParameters"
-					expression="fn:concat(get-property('uri.var.apiParameters'),'offset=',get-property('uri.var.offset'), '&amp;')" />
-			</then>
-		</filter>
-		<filter xpath="fn:string-length(get-property('uri.var.apiParameters')) > 0">
-			<then>
-				<property name="uri.var.apiParameters"
-					expression="fn:concat('?', fn:substring(get-property('uri.var.apiParameters'), 1, fn:string-length(get-property('uri.var.apiParameters'))-1))" />
-			</then>
-		</filter>
-		<call>
-			<endpoint>
-				<http method="get" uri-template="{uri.var.apiUrl}/plans{uri.var.apiParameters}" />
-			</endpoint>
-		</call>
-	</sequence>
+   <parameter name="limit" description="The number of results per page." />
+   <parameter name="offset" description="The offset value for pagination." />
+   <sequence>
+      <property name="uri.var.limit" expression="$func:limit" />
+      <property name="uri.var.offset" expression="$func:offset" />
+      <property name="uri.var.apiParameters" value="" />
+      <filter xpath="boolean(get-property('uri.var.limit'))">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat(get-property('uri.var.apiParameters'),'limit=',get-property('uri.var.limit'), '&amp;')" />
+         </then>
+      </filter>
+      <filter xpath="boolean(get-property('uri.var.offset'))">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat(get-property('uri.var.apiParameters'),'offset=',get-property('uri.var.offset'), '&amp;')" />
+         </then>
+      </filter>
+      <filter xpath="boolean(get-property('uri.var.apiParameters'))">
+         <then>
+            <property name="uri.var.apiParameters"
+               expression="fn:concat('?', fn:substring(get-property('uri.var.apiParameters'), 1, fn:string-length(get-property('uri.var.apiParameters'))-1))" />
+         </then>
+      </filter>
+      <call>
+         <endpoint>
+            <http method="get" uri-template="{uri.var.apiUrl}/plans{uri.var.apiParameters}" />
+         </endpoint>
+      </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
+   </sequence>
 </template>

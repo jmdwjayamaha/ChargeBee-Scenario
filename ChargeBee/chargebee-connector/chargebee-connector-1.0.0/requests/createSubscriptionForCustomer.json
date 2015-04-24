@@ -9,7 +9,7 @@
    "trialEndDate" : "1430395684",
    "billingCycles" : "1",
    "couponId" : "test_coupon_opt16",
-   "pONumber" : "00000",
+   "purchaseOrderNumber" : "00000",
    "invoiceNotes" : "notes for the invoice",
    "shippingAddressFirstName" : "Danushka",
    "shippingAddressLastName" : "Wirajith",

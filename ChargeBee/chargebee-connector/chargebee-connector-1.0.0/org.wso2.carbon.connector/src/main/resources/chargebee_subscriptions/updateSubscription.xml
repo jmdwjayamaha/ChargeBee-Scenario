@@ -26,6 +26,7 @@
    <parameter name="billingCycles" description="The number of billing cycles the subscription should be charged." />
    <parameter name="isReplaceAddonList" description="The boolean flag to change the existing addon list." />
    <parameter name="couponId" description="The unique identifier of a coupon." />
+   <parameter name="purchaseOrderNumber" description="The purchase order number." />
    <parameter name="isProrated" description="The boolean flag indicating prorated credit and charges." />
    <parameter name="isEndOfTerm" description="The boolean flag indicating the changes applied in the end of the term." />
    <parameter name="invoiceNotes" description="The notes for the invoice." />
@@ -34,43 +35,43 @@
    <parameter name="cardFirstName" description="The first name of the card holder." />
    <parameter name="cardLastName" description="The last name of the card holder." />
    <parameter name="cardNumber" description="The credit card number without any formatting." />
-   <parameter name="cardExpiryMonth" description="The card expiry month." />
-   <parameter name="cardExpiryYear" description="The card expiry year." />
-   <parameter name="cardCVV" description="The card verification value." />
-   <parameter name="cardBillingAddress1" description="The card billing address line1." />
-   <parameter name="cardBillingAddress2" description="The card billing address line2." />
-   <parameter name="cardBillingCity" description="The card billing address city." />
-   <parameter name="cardBillingStateCode" description="The The card billing address state code." />
-   <parameter name="cardBillingState" description="The card billing address state." />
-   <parameter name="cardBillingZip" description="The The card billing address zip or postal code." />
+   <parameter name="cardExpiryMonth" description="The expiry month of the card." />
+   <parameter name="cardExpiryYear" description="The expiry year of the card." />
+   <parameter name="cardCVV" description="The verification value of the card." />
+   <parameter name="cardBillingAddress1" description="The line1 of the card billing address." />
+   <parameter name="cardBillingAddress2" description="The line2 of the  card billing address." />
+   <parameter name="cardBillingCity" description="The city of the card billing address." />
+   <parameter name="cardBillingStateCode" description="The state code of the card billing address." />
+   <parameter name="cardBillingState" description="The state of the card billing address." />
+   <parameter name="cardBillingZip" description="The zip or postal code of the card billing address." />
    <parameter name="cardBillingCountry" description="The card billing address country." />
    <parameter name="cardIpAddress" description="The IP address from where the payment method is created or updated." />
-   <parameter name="billingAddressFirstName" description="The billing address first name." />
-   <parameter name="billingAddressLastName" description="The billing address last name." />
-   <parameter name="billingAddressEmail" description="The billing address email." />
-   <parameter name="billingAddressCompanyName" description="The billing address company name." />
-   <parameter name="billingAddressPhoneNumber" description="The billing address phone number." />
-   <parameter name="billingAddressLine1" description="The billing address line1." />
-   <parameter name="billingAddressLine2" description="The billing address line2." />
-   <parameter name="billingAddressLine3" description="The billing address line3." />
-   <parameter name="billingAddressCity" description="The billing address city." />
-   <parameter name="billingAddressStateCode" description="The billing address state code." />
-   <parameter name="billingAddressState" description="The billing address state." />
-   <parameter name="billingAddressZip" description="The billing address zip or postal code." />
-   <parameter name="billingAddressCountry" description="The billing address country." />
-   <parameter name="shippingAddressFirstName" description="The shipping address first name." />
-   <parameter name="shippingAddressLastName" description="The shipping address last name." />
-   <parameter name="shippingAddressEmail" description="The shipping address email." />
-   <parameter name="shippingAddressCompanyName" description="The shipping address company name." />
-   <parameter name="shippingAddressPhoneNumber" description="The shipping address phone number." />
-   <parameter name="shippingAddressLine1" description="The shipping address line1." />
-   <parameter name="shippingAddressLine2" description="The shipping address line2." />
-   <parameter name="shippingAddressLine3" description="The shipping address line3." />
-   <parameter name="shippingAddressCity" description="The shipping address city." />
-   <parameter name="shippingAddressStateCode" description="The shipping address state code." />
-   <parameter name="shippingAddressState" description="The shipping address state." />
-   <parameter name="shippingAddressZip" description="The shipping address zip or postal code." />
-   <parameter name="shippingAddressCountry" description="The shipping address country." />
+   <parameter name="billingAddressFirstName" description="The first name of the billing address." />
+   <parameter name="billingAddressLastName" description="The last name of the billing address." />
+   <parameter name="billingAddressEmail" description="The email of the billing address." />
+   <parameter name="billingAddressCompanyName" description="The company name of the billing address." />
+   <parameter name="billingAddressPhoneNumber" description="The phone number of the billing address." />
+   <parameter name="billingAddressLine1" description="The line1 of the billing address." />
+   <parameter name="billingAddressLine2" description="The line2 of the billing address." />
+   <parameter name="billingAddressLine3" description="The line3 of the billing address." />
+   <parameter name="billingAddressCity" description="The city of the billing address." />
+   <parameter name="billingAddressStateCode" description="The state code of the billing address." />
+   <parameter name="billingAddressState" description="The state of the billing address." />
+   <parameter name="billingAddressZip" description="The zip or postal code of the billing address." />
+   <parameter name="billingAddressCountry" description="The country of the billing address." />
+   <parameter name="shippingAddressFirstName" description="The first name of the shipping address." />
+   <parameter name="shippingAddressLastName" description="The last name of the shipping address." />
+   <parameter name="shippingAddressEmail" description="The email of the shipping address." />
+   <parameter name="shippingAddressCompanyName" description="The company name of the shipping address." />
+   <parameter name="shippingAddressPhoneNumber" description="The phone number of the shipping address." />
+   <parameter name="shippingAddressLine1" description="The line1 of the shipping address." />
+   <parameter name="shippingAddressLine2" description="The line2 of the shipping address." />
+   <parameter name="shippingAddressLine3" description="The line3 of the shipping address." />
+   <parameter name="shippingAddressCity" description="The city of the shipping address." />
+   <parameter name="shippingAddressStateCode" description="The state code of the shipping address." />
+   <parameter name="shippingAddressState" description="The state of the shipping address." />
+   <parameter name="shippingAddressZip" description="The zip or postal code of the shipping address." />
+   <parameter name="shippingAddressCountry" description="The country of the shipping address." />
    <parameter name="customerVatNumber" description="The VAT number for the customer." />
    <parameter name="addonDetails" description="The addon details including addon IDs and the quantities." />
    <sequence>
@@ -82,6 +83,7 @@
       <property name="uri.var.billingCycles" expression="$func:billingCycles" />
       <property name="uri.var.isReplaceAddonList" expression="$func:isReplaceAddonList" />
       <property name="uri.var.couponId" expression="$func:couponId" />
+      <property name="uri.var.purchaseOrderNumber" expression="$func:purchaseOrderNumber" />
       <property name="uri.var.isProrated" expression="$func:isProrated" />
       <property name="uri.var.isEndOfTerm" expression="$func:isEndOfTerm" />
       <property name="uri.var.invoiceNotes" expression="$func:invoiceNotes" />
@@ -133,13 +135,46 @@
          <![CDATA[
             // Generate request payload with optional parameters
             var subscriptionId = mc.getProperty('uri.var.subscriptionId');
+            var planId = mc.getProperty('uri.var.planId');
             var planQuantity = mc.getProperty('uri.var.planQuantity');
             var startDate = mc.getProperty('uri.var.startDate');
             var trialEndDate = mc.getProperty('uri.var.trialEndDate');
             var billingCycles = mc.getProperty('uri.var.billingCycles');
+            var isReplaceAddonList = mc.getProperty('uri.var.isReplaceAddonList');
             var couponId = mc.getProperty('uri.var.couponId');
-            var pONumber = mc.getProperty('uri.var.pONumber');
+            var purchaseOrderNumber = mc.getProperty('uri.var.purchaseOrderNumber');
+            var isProrated = mc.getProperty('uri.var.isProrated');
+            var isEndOfTerm = mc.getProperty('uri.var.isEndOfTerm');
             var invoiceNotes = mc.getProperty('uri.var.invoiceNotes');
+            var cardGateway = mc.getProperty('uri.var.cardGateway');
+            var cardTmpToken = mc.getProperty('uri.var.cardTmpToken');
+            var cardFirstName = mc.getProperty('uri.var.cardFirstName');
+            var cardLastName = mc.getProperty('uri.var.cardLastName');
+            var cardNumber = mc.getProperty('uri.var.cardNumber');
+            var cardExpiryMonth = mc.getProperty('uri.var.cardExpiryMonth');
+            var cardExpiryYear = mc.getProperty('uri.var.cardExpiryYear');
+            var cardCVV = mc.getProperty('uri.var.cardCVV');
+            var cardBillingAddress1 = mc.getProperty('uri.var.cardBillingAddress1');
+            var cardBillingAddress2 = mc.getProperty('uri.var.cardBillingAddress2');
+            var cardBillingCity = mc.getProperty('uri.var.cardBillingCity');
+            var cardBillingStateCode = mc.getProperty('uri.var.cardBillingStateCode');
+            var cardBillingState = mc.getProperty('uri.var.cardBillingState');
+            var cardBillingZip = mc.getProperty('uri.var.cardBillingZip');
+            var cardBillingCountry = mc.getProperty('uri.var.cardBillingCountry');
+            var cardIpAddress = mc.getProperty('uri.var.cardIpAddress');
+            var billingAddressFirstName = mc.getProperty('uri.var.billingAddressFirstName');
+            var billingAddressLastName = mc.getProperty('uri.var.billingAddressLastName');
+            var billingAddressEmail = mc.getProperty('uri.var.billingAddressEmail');
+            var billingAddressCompanyName = mc.getProperty('uri.var.billingAddressCompanyName');
+            var billingAddressPhoneNumber = mc.getProperty('uri.var.billingAddressPhoneNumber');
+            var billingAddressLine1 = mc.getProperty('uri.var.billingAddressLine1');
+            var billingAddressLine2 = mc.getProperty('uri.var.billingAddressLine2');
+            var billingAddressLine3 = mc.getProperty('uri.var.billingAddressLine3');
+            var billingAddressCity = mc.getProperty('uri.var.billingAddressCity');
+            var billingAddressStateCode = mc.getProperty('uri.var.billingAddressStateCode');
+            var billingAddressState = mc.getProperty('uri.var.billingAddressState');
+            var billingAddressZip = mc.getProperty('uri.var.billingAddressZip');
+            var billingAddressCountry = mc.getProperty('uri.var.billingAddressCountry');
             var shippingAddressFirstName = mc.getProperty('uri.var.shippingAddressFirstName');
             var shippingAddressLastName = mc.getProperty('uri.var.shippingAddressLastName');
             var shippingAddressEmail = mc.getProperty('uri.var.shippingAddressEmail');
@@ -153,16 +188,20 @@
             var shippingAddressState = mc.getProperty('uri.var.shippingAddressState');
             var shippingAddressZip = mc.getProperty('uri.var.shippingAddressZip');
             var shippingAddressCountry = mc.getProperty('uri.var.shippingAddressCountry');
+            var customerVatNumber = mc.getProperty('uri.var.customerVatNumber');
             var addonDetails = mc.getProperty('uri.var.addonDetails');
-            
-            // URI Encode the customerId parameter
-            customerId = encodeURIComponent(customerId);
-            mc.setProperty('uri.var.customerId', customerId);
-            
-            var payload = mc.getPayloadJSON();
-            payload = new Object();
-            if (subscriptionId != null && subscriptionId != "") {
-               payload.id = subscriptionId;
+            // URI Encode the subscriptionId parameter
+            subscriptionId = encodeURIComponent(subscriptionId);
+            mc.setProperty('uri.var.subscriptionId', subscriptionId);
+            // Add the addon details parameter containing both addon Ids an the addon quantities
+            // Since the paramters contain multiple occurrences directly add to the payload
+            if (addonDetails != null && addonDetails != "") {
+               payload = eval("(" + addonDetails + ")");
+            } else {
+               payload = new Object();
+            }
+            if (planId != null && planId != "") {
+               payload.plan_id = planId;
             }
             if (planQuantity != null && planQuantity != "") {
                payload.plan_quantity = planQuantity;
@@ -176,70 +215,164 @@
             if (billingCycles != null && billingCycles != "") {
                payload.billing_cycles = billingCycles;
             }
+            if (isReplaceAddonList != null && isReplaceAddonList != "") {
+               payload.replace_addon_list = isReplaceAddonList;
+            }
             if (couponId != null && couponId != "") {
                payload.coupon = couponId;
             }
-            if (pONumber != null && pONumber != "") {
-               payload.po_number = pONumber;
+            if (purchaseOrderNumber != null && purchaseOrderNumber != "") {
+               payload.po_number = purchaseOrderNumber;
+            }
+            if (isProrated != null && isProrated != "") {
+               payload.prorate = isProrated;
+            }
+            if (isEndOfTerm != null && isEndOfTerm != "") {
+               payload.end_of_term = isEndOfTerm;
             }
             if (invoiceNotes != null && invoiceNotes != "") {
                payload.invoice_notes = invoiceNotes;
             }
+            if (cardGateway != null && cardGateway != "") {
+               payload["card[gateway]"] = cardGateway;
+            }
+            if (cardTmpToken != null && cardTmpToken != "") {
+               payload["card[tmp_token]"] = cardTmpToken;
+            }
+            if (cardFirstName != null && cardFirstName != "") {
+               payload["card[first_name]"] = cardFirstName;
+            }
+            if (cardLastName != null && cardLastName != "") {
+               payload["card[last_name]"] = cardLastName;
+            }
+            if (cardNumber != null && cardNumber != "") {
+               payload["card[number]"] = cardNumber;
+            }
+            if (cardExpiryMonth != null && cardExpiryMonth != "") {
+               payload["card[expiry_month]"] = cardExpiryMonth;
+            }
+            if (cardExpiryYear != null && cardExpiryYear != "") {
+               payload["card[expiry_year]"] = cardExpiryYear;
+            }
+            if (cardCVV != null && cardCVV != "") {
+               payload["card[cvv]"] = cardCVV;
+            }
+            if (cardBillingAddress1 != null && cardBillingAddress1 != "") {
+               payload["card[billing_addr1]"] = cardBillingAddress1;
+            }
+            if (cardBillingAddress2 != null && cardBillingAddress2 != "") {
+               payload["card[billing_addr2]"] = cardBillingAddress2;
+            }
+            if (cardBillingCity != null && cardBillingCity != "") {
+               payload["card[billing_city]"] = cardBillingCity;
+            }
+            if (cardBillingStateCode != null && cardBillingStateCode != "") {
+               payload["card[billing_state_code]"] = cardBillingStateCode;
+            }
+            if (cardBillingState != null && cardBillingState != "") {
+               payload["card[billing_state]"] = cardBillingState;
+            }
+            if (cardBillingZip != null && cardBillingZip != "") {
+               payload["card[billing_zip]"] = cardBillingZip;
+            }
+            if (cardBillingCountry != null && cardBillingCountry != "") {
+               payload["card[billing_country]"] = cardBillingCountry;
+            }
+            if (cardIpAddress != null && cardIpAddress != "") {
+               payload["card[ip_address]"] = cardIpAddress;
+            }
+            if (billingAddressFirstName != null && billingAddressFirstName != "") {
+               payload["billing_address[first_name]"] = billingAddressFirstName;
+            }
+            if (billingAddressLastName != null && billingAddressLastName != "") {
+               payload["billing_address[last_name]"] = billingAddressLastName;
+            }
+            if (billingAddressEmail != null && billingAddressEmail != "") {
+               payload["billing_address[email]"] = billingAddressEmail;
+            }
+            if (billingAddressCompanyName != null && billingAddressCompanyName != "") {
+               payload["billing_address[company]"] = billingAddressCompanyName;
+            }
+            if (billingAddressPhoneNumber != null && billingAddressPhoneNumber != "") {
+               payload["billing_address[phone]"] = billingAddressPhoneNumber;
+            }
+            if (billingAddressLine1 != null && billingAddressLine1 != "") {
+               payload["billing_address[line1]"] = billingAddressLine1;
+            }
+            if (billingAddressLine2 != null && billingAddressLine2 != "") {
+               payload["billing_address[line2]"] = billingAddressLine2;
+            }
+            if (billingAddressLine3 != null && billingAddressLine3 != "") {
+               payload["billing_address[line3]"] = billingAddressLine3;
+            }
+            if (billingAddressCity != null && billingAddressCity != "") {
+               payload["billing_address[city]"] = billingAddressCity;
+            }
+            if (billingAddressStateCode != null && billingAddressStateCode != "") {
+               payload["billing_address[state_code]"] = billingAddressStateCode;
+            }
+            if (billingAddressState != null && billingAddressState != "") {
+               payload["billing_address[state]"] = billingAddressState;
+            }
+            if (billingAddressZip != null && billingAddressZip != "") {
+               payload["billing_address[zip]"] = billingAddressZip;
+            }
+            if (billingAddressCountry != null && billingAddressCountry != "") {
+               payload["billing_address[country]"] = billingAddressCountry;
+            }
             if (shippingAddressFirstName != null && shippingAddressFirstName != "") {
-               payload.shipping_address[first_name] = shippingAddressFirstName;
+               payload["shipping_address[first_name]"] = shippingAddressFirstName;
             }
             if (shippingAddressLastName != null && shippingAddressLastName != "") {
-               payload.shipping_address[last_name] = shippingAddressLastName;
+               payload["shipping_address[last_name]"] = shippingAddressLastName;
             }
             if (shippingAddressEmail != null && shippingAddressEmail != "") {
-               payload.shipping_address[email] = shippingAddressEmail;
+               payload["shipping_address[email]"] = shippingAddressEmail;
             }
             if (shippingAddressCompanyName != null && shippingAddressCompanyName != "") {
-               payload.shipping_address[company] = shippingAddressCompanyName;
+               payload["shipping_address[company]"] = shippingAddressCompanyName;
             }
             if (shippingAddressPhoneNumber != null && shippingAddressPhoneNumber != "") {
-               payload.shipping_address[phone] = shippingAddressPhoneNumber;
+               payload["shipping_address[phone]"] = shippingAddressPhoneNumber;
             }
             if (shippingAddressLine1 != null && shippingAddressLine1 != "") {
-               payload.shipping_address[line1] = shippingAddressLine1;
+               payload["shipping_address[line1]"] = shippingAddressLine1;
             }
             if (shippingAddressLine2 != null && shippingAddressLine2 != "") {
-               payload.shipping_address[line2] = shippingAddressLine2;
+               payload["shipping_address[line2]"] = shippingAddressLine2;
             }
             if (shippingAddressLine3 != null && shippingAddressLine3 != "") {
-               payload.shipping_address[line3] = shippingAddressLine3;
+               payload["shipping_address[line3]"] = shippingAddressLine3;
             }
             if (shippingAddressCity != null && shippingAddressCity != "") {
-               payload.shipping_address[city] = shippingAddressCity;
+               payload["shipping_address[city]"] = shippingAddressCity;
             }
             if (shippingAddressStateCode != null && shippingAddressStateCode != "") {
-               payload.shipping_address[state_code] = shippingAddressStateCode;
+               payload["shipping_address[state_code]"] = shippingAddressStateCode;
             }
             if (shippingAddressState != null && shippingAddressState != "") {
-               payload.shipping_address[state] = shippingAddressState;
+               payload["shipping_address[state]"] = shippingAddressState;
             }
             if (shippingAddressZip != null && shippingAddressZip != "") {
-               payload.shipping_address[zip] = shippingAddressZip;
+               payload["shipping_address[zip]"] = shippingAddressZip;
             }
             if (shippingAddressCountry != null && shippingAddressCountry != "") {
-               payload.shipping_address[country] = shippingAddressCountry;
+               payload["shipping_address[country]"] = shippingAddressCountry;
             }
-                 
-            // TODO: Setting parameters
-                        
+            if (customerVatNumber != null && customerVatNumber != "") {
+               payload["customer[vat_number]"] = customerVatNumber;
+            }
             mc.setPayloadJSON(payload);
-            // Count whether any parameter exists in the payload.
-            var payloadParamCount = 0;
+            // Check whether any parameter exists in the payload.
             for(var prop in payload) {
                if (payload.hasOwnProperty(prop)) {
-                  payloadParamCount = 1;
+                  mc.setProperty('uri.var.isPayloadParamsExist', "true");
                   break;
                }
             }
-            mc.setProperty('payloadParamCount', payloadParamCount);
          ]]>
       </script>
-      <filter xpath="get-property('payloadFlag') = '1'">
+      <filter xpath="boolean(get-property('uri.var.isPayloadParamsExist'))">
          <then>
             <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2" />
          </then>
@@ -249,5 +382,7 @@
             <http method="post" uri-template="{uri.var.apiUrl}/subscriptions/{uri.var.subscriptionId}" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

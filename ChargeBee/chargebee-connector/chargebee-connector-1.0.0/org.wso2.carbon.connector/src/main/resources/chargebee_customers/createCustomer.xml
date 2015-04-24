@@ -16,6 +16,7 @@
    specific language governing permissions and limitations
    under the License.
 -->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/customers#create_a_customer -->
 <template name="createCustomer" xmlns="http://ws.apache.org/ns/synapse">
    <parameter name="customerId" description="The id for the new customer." />
    <parameter name="firstName" description="The first name of the customer." />
@@ -57,46 +58,45 @@
    <parameter name="billingAddressZip" description="The zip in billing address." />
    <parameter name="billingAddressCountry" description="The country in billing address." />
    <sequence>
-      <property expression="$func:customerId" name="uri.var.customerId" />
-      <property expression="$func:firstName" name="uri.var.firstName" />
-      <property expression="$func:lastName" name="uri.var.lastName" />
-      <property expression="$func:email" name="uri.var.email" />
-      <property expression="$func:phoneNumber" name="uri.var.phoneNumber" />
-      <property expression="$func:companyName" name="uri.var.companyName" />
-      <property expression="$func:autoCollection" name="uri.var.autoCollection" />
-      <property expression="$func:vatNumber" name="uri.var.vatNumber" />
-      <property expression="$func:createdFromIp" name="uri.var.createdFromIp" />
-      <property expression="$func:invoiceNotes" name="uri.var.invoiceNotes" />
-      <property expression="$func:cardGateway" name="uri.var.cardGateway" />
-      <property expression="$func:cardTmpToken" name="uri.var.cardTmpToken" />
-      <property expression="$func:cardFirstName" name="uri.var.cardFirstName" />
-      <property expression="$func:cardLastName" name="uri.var.cardLastName" />
-      <property expression="$func:cardNumber" name="uri.var.cardNumber" />
-      <property expression="$func:cardExpiryMonth" name="uri.var.cardExpiryMonth" />
-      <property expression="$func:cardExpiryYear" name="uri.var.cardExpiryYear" />
-      <property expression="$func:cardCVV" name="uri.var.cardCVV" />
-      <property expression="$func:cardBillingAddress1" name="uri.var.cardBillingAddress1" />
-      <property expression="$func:cardBillingAddress2" name="uri.var.cardBillingAddress2" />
-      <property expression="$func:cardBillingCity" name="uri.var.cardBillingCity" />
-      <property expression="$func:cardBillingStateCode" name="uri.var.cardBillingStateCode" />
-      <property expression="$func:cardBillingState" name="uri.var.cardBillingState" />
-      <property expression="$func:cardBillingZip" name="uri.var.cardBillingZip" />
-      <property expression="$func:cardBillingCountry" name="uri.var.cardBillingCountry" />
-      <property expression="$func:cardIpAddress" name="uri.var.cardIpAddress" />
-      <property expression="$func:billingAddressFirstName" name="uri.var.billingAddressFirstName" />
-      <property expression="$func:billingAddressLastName" name="uri.var.billingAddressLastName" />
-      <property expression="$func:billingAddressEmail" name="uri.var.billingAddressEmail" />
-      <property expression="$func:billingAddressCompanyName" name="uri.var.billingAddressCompanyName" />
-      <property expression="$func:billingAddressPhoneNumber" name="uri.var.billingAddressPhoneNumber" />
-      <property expression="$func:billingAddressLine1" name="uri.var.billingAddressLine1" />
-      <property expression="$func:billingAddressLine2" name="uri.var.billingAddressLine2" />
-      <property expression="$func:billingAddressLine3" name="uri.var.billingAddressLine3" />
-      <property expression="$func:billingAddressCity" name="uri.var.billingAddressCity" />
-      <property expression="$func:billingAddressStateCode" name="uri.var.billingAddressStateCode" />
-      <property expression="$func:billingAddressState" name="uri.var.billingAddressState" />
-      <property expression="$func:billingAddressZip" name="uri.var.billingAddressZip" />
-      <property expression="$func:billingAddressCountry" name="uri.var.billingAddressCountry" />
-      <property value="" name="payloadFlag" />
+      <property name="uri.var.customerId" expression="$func:customerId" />
+      <property name="uri.var.firstName" expression="$func:firstName" />
+      <property name="uri.var.lastName" expression="$func:lastName" />
+      <property name="uri.var.email" expression="$func:email" />
+      <property name="uri.var.phoneNumber" expression="$func:phoneNumber" />
+      <property name="uri.var.companyName" expression="$func:companyName" />
+      <property name="uri.var.autoCollection" expression="$func:autoCollection" />
+      <property name="uri.var.vatNumber" expression="$func:vatNumber" />
+      <property name="uri.var.createdFromIp" expression="$func:createdFromIp" />
+      <property name="uri.var.invoiceNotes" expression="$func:invoiceNotes" />
+      <property name="uri.var.cardGateway" expression="$func:cardGateway" />
+      <property name="uri.var.cardTmpToken" expression="$func:cardTmpToken" />
+      <property name="uri.var.cardFirstName" expression="$func:cardFirstName" />
+      <property name="uri.var.cardLastName" expression="$func:cardLastName" />
+      <property name="uri.var.cardNumber" expression="$func:cardNumber" />
+      <property name="uri.var.cardExpiryMonth" expression="$func:cardExpiryMonth" />
+      <property name="uri.var.cardExpiryYear" expression="$func:cardExpiryYear" />
+      <property name="uri.var.cardCVV" expression="$func:cardCVV" />
+      <property name="uri.var.cardBillingAddress1" expression="$func:cardBillingAddress1" />
+      <property name="uri.var.cardBillingAddress2" expression="$func:cardBillingAddress2" />
+      <property name="uri.var.cardBillingCity" expression="$func:cardBillingCity" />
+      <property name="uri.var.cardBillingStateCode" expression="$func:cardBillingStateCode" />
+      <property name="uri.var.cardBillingState" expression="$func:cardBillingState" />
+      <property name="uri.var.cardBillingZip" expression="$func:cardBillingZip" />
+      <property name="uri.var.cardBillingCountry" expression="$func:cardBillingCountry" />
+      <property name="uri.var.cardIpAddress" expression="$func:cardIpAddress" />
+      <property name="uri.var.billingAddressFirstName" expression="$func:billingAddressFirstName" />
+      <property name="uri.var.billingAddressLastName" expression="$func:billingAddressLastName" />
+      <property name="uri.var.billingAddressEmail" expression="$func:billingAddressEmail" />
+      <property name="uri.var.billingAddressCompanyName" expression="$func:billingAddressCompanyName" />
+      <property name="uri.var.billingAddressPhoneNumber" expression="$func:billingAddressPhoneNumber" />
+      <property name="uri.var.billingAddressLine1" expression="$func:billingAddressLine1" />
+      <property name="uri.var.billingAddressLine2" expression="$func:billingAddressLine2" />
+      <property name="uri.var.billingAddressLine3" expression="$func:billingAddressLine3" />
+      <property name="uri.var.billingAddressCity" expression="$func:billingAddressCity" />
+      <property name="uri.var.billingAddressStateCode" expression="$func:billingAddressStateCode" />
+      <property name="uri.var.billingAddressState" expression="$func:billingAddressState" />
+      <property name="uri.var.billingAddressZip" expression="$func:billingAddressZip" />
+      <property name="uri.var.billingAddressCountry" expression="$func:billingAddressCountry" />
       <script language="js">
       <![CDATA[
          var payload = mc.getPayloadJSON();
@@ -257,18 +257,17 @@
          if (billingAddressCountry != null && billingAddressCountry != "") {
             payload ["billing_address[country]"] = billingAddressCountry;
          } 
-         var payloadFlag = 0;
-         for(var prop in payload) {
+         // Check whether any parameter exists in the payload.
+         for(var prop in payload) {
             if (payload.hasOwnProperty(prop)) {
-               payloadFlag = 1;
+               mc.setProperty('uri.var.isPayloadParamsExist', "true");
                break;
             }
-         }
+         }
          mc.setPayloadJSON(payload);
-         mc.setProperty('payloadFlag',payloadFlag);
       ]]>
       </script>
-      <filter xpath="get-property('payloadFlag') = '1'">
+      <filter xpath="boolean(get-property('uri.var.isPayloadParamsExist'))">
          <then>
             <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2" />
          </then>
@@ -278,5 +277,7 @@
             <http method="post" uri-template="{uri.var.apiUrl}/customers" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

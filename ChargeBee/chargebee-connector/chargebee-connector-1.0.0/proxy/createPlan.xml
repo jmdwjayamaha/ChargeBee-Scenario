@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_createPlan" transports="https,http" statistics="disable" trace="disable" startOnLoad="true">
 	<target>
-		<inSequence>
+		<inSequence onError="faultHandlerSeq">
 			<property name="apiUrl" expression="json-eval($.apiUrl)"/>
 			<property name="apiKey" expression="json-eval($.apiKey)"/>
 			<property name="planId" expression="json-eval($.planId)" />

@@ -1,0 +1,13 @@
+{
+"apiUrl":" https://www.billiving.com",
+"accessToken":"44961c1a-95c1-4a85-ab70-de88b98409e7",
+"clientId":"5",    
+"docItems": [
+    {
+      "ItemId": "XBR-65X950B",
+      "ItemDescription": "Flagship 4K Ultra HD TV",
+      "ItemPrice": 6999.0,
+      "ItemQuantity": 1.0
+    }
+  ]
+}

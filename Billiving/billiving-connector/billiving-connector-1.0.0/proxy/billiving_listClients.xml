@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="billiving_listClients"
+       transports="https,http"
+       statistics="disable"
+       trace="disable"
+       startOnLoad="true">
+   <target>
+      <inSequence onError="faultHandlerSeq">
+         <property name="apiUrl" expression="json-eval($.apiUrl)"/>
+         <property name="accessToken" expression="json-eval($.accessToken)"/>
+         <property name="freeText" expression="json-eval($.freeText)"/>
+         <property name="statusId" expression="json-eval($.statusId)"/>
+         <property name="skip" expression="json-eval($.skip)"/>
+         <property name="top" expression="json-eval($.top)"/>
+         <property name="orderBy" expression="json-eval($.orderBy)"/>
+         <property name="count" expression="json-eval($.count)"/>
+         <property name="fileType" expression="json-eval($.fileType)"/>
+         <property name="from" expression="json-eval($.from)"/>
+         <property name="to" expression="json-eval($.to)"/>
+         <billiving.init>
+            <apiUrl>{$ctx:apiUrl}</apiUrl>
+            <accessToken>{$ctx:accessToken}</accessToken>
+         </billiving.init>
+         <billiving.listClients>
+            <statusId>{$ctx:statusId}</statusId>
+            <fileType>{$ctx:fileType}</fileType>
+            <count>{$ctx:count}</count>
+            <orderBy>{$ctx:orderBy}</orderBy>
+            <freeText>{$ctx:freeText}</freeText>
+            <skip>{$ctx:skip}</skip>
+            <top>{$ctx:top}</top>
+            <from>{$ctx:from}</from>
+            <to>{$ctx:to}</to>
+         </billiving.listClients>
+         <respond/>
+      </inSequence>
+      <outSequence>
+         <log/>
+         <send/>
+      </outSequence>
+   </target>
+   <description/>
+</proxy>

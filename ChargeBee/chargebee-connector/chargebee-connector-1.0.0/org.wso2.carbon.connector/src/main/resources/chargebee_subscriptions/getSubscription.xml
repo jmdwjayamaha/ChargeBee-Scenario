@@ -32,5 +32,7 @@
             <http method="get" uri-template="{uri.var.apiUrl}/subscriptions/{uri.var.subscriptionId}" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

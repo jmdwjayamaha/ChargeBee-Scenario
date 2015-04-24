@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <proxy xmlns="http://ws.apache.org/ns/synapse"
-       name="chargebee_listSubscriptions"
+       name="chargebee_cancelSubscription"
        transports="https,http"
        statistics="disable"
        trace="disable"
        startOnLoad="true">
    <target>
-      <inSequence>
+      <inSequence onError="faultHandlerSeq">
          <property name="apiUrl" expression="json-eval($.apiUrl)"/>
          <property name="apiKey" expression="json-eval($.apiKey)"/>
-         <property name="limit" expression="json-eval($.limit)"/>
-         <property name="offset" expression="json-eval($.offset)"/>
+         <property name="subscriptionId" expression="json-eval($.subscriptionId)"/>
+         <property name="isEndOfTerm" expression="json-eval($.isEndOfTerm)"/>
          <chargebee.init>
             <apiUrl>{$ctx:apiUrl}</apiUrl>
             <apiKey>{$ctx:apiKey}</apiKey>
          </chargebee.init>
-         <chargebee.listSubscriptions>
-            <limit>{$ctx:limit}</limit>
-            <offset>{$ctx:offset}</offset>
-         </chargebee.listSubscriptions>
+         <chargebee.cancelSubscription>
+            <subscriptionId>{$ctx:subscriptionId}</subscriptionId>
+            <isEndOfTerm>{$ctx:isEndOfTerm}</isEndOfTerm>
+         </chargebee.cancelSubscription>
          <respond/>
       </inSequence>
       <outSequence>

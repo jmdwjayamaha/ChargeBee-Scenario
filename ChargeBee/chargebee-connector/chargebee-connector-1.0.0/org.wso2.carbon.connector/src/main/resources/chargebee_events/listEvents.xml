@@ -16,6 +16,7 @@
    specific language governing permissions and limitations
    under the License.
 -->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/events#list_events -->
 <template name="listEvents" xmlns="http://ws.apache.org/ns/synapse">
    <parameter name="limit" description="The number of results per page." />
    <parameter name="offset" description="The offset value for pagination." />
@@ -30,7 +31,6 @@
       <property expression="$func:endTime" name="uri.var.endTime" />
       <property expression="$func:webhookStatus" name="uri.var.webhookStatus" />
       <property expression="$func:eventType" name="uri.var.eventType" />
-      <property name="uri.var.apiParameters" value="" />
       <script language="js">
       <![CDATA[
          var limit = mc.getProperty('uri.var.limit');
@@ -39,7 +39,7 @@
          var endTime = mc.getProperty('uri.var.endTime');
          var webhookStatus = mc.getProperty('uri.var.webhookStatus');
          var eventType = mc.getProperty('uri.var.eventType');
-         var apiParameters = mc.getProperty('uri.var.apiParameters');
+         var apiParameters = "";
          if (limit != null && limit != "") {
             apiParameters += "limit=" + limit + '&';
          }
@@ -69,5 +69,7 @@
             <http method="get" uri-template="{uri.var.apiUrl}/events{uri.var.apiParameters}" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>

@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2005-2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/subscriptions#update_a_subscription -->
+<template name="updateSubscription" xmlns="http://ws.apache.org/ns/synapse">
+   <parameter name="subscriptionId" description="The unique identifier of the subscription." />
+   <parameter name="planId" description="The unique identifier of the plan." />
+   <parameter name="planQuantity" description="The quantity of plans to be subscribed." />
+   <parameter name="startDate" description="The start date in UTC timestamp." />
+   <parameter name="trialEndDate" description="The end date of trial subscription in UTC timestamp." />
+   <parameter name="billingCycles" description="The number of billing cycles the subscription should be charged." />
+   <parameter name="isReplaceAddonList" description="The boolean flag to change the existing addon list." />
+   <parameter name="couponId" description="The unique identifier of a coupon." />
+   <parameter name="isProrated" description="The boolean flag indicating prorated credit and charges." />
+   <parameter name="isEndOfTerm" description="The boolean flag indicating the changes applied in the end of the term." />
+   <parameter name="invoiceNotes" description="The notes for the invoice." />
+   <parameter name="cardGateway" description="The name of the gateway for the card." />
+   <parameter name="cardTmpToken" description="The single use card token." />
+   <parameter name="cardFirstName" description="The first name of the card holder." />
+   <parameter name="cardLastName" description="The last name of the card holder." />
+   <parameter name="cardNumber" description="The credit card number without any formatting." />
+   <parameter name="cardExpiryMonth" description="The card expiry month." />
+   <parameter name="cardExpiryYear" description="The card expiry year." />
+   <parameter name="cardCVV" description="The card verification value." />
+   <parameter name="cardBillingAddress1" description="The card billing address line1." />
+   <parameter name="cardBillingAddress2" description="The card billing address line2." />
+   <parameter name="cardBillingCity" description="The card billing address city." />
+   <parameter name="cardBillingStateCode" description="The The card billing address state code." />
+   <parameter name="cardBillingState" description="The card billing address state." />
+   <parameter name="cardBillingZip" description="The The card billing address zip or postal code." />
+   <parameter name="cardBillingCountry" description="The card billing address country." />
+   <parameter name="cardIpAddress" description="The IP address from where the payment method is created or updated." />
+   <parameter name="billingAddressFirstName" description="The billing address first name." />
+   <parameter name="billingAddressLastName" description="The billing address last name." />
+   <parameter name="billingAddressEmail" description="The billing address email." />
+   <parameter name="billingAddressCompanyName" description="The billing address company name." />
+   <parameter name="billingAddressPhoneNumber" description="The billing address phone number." />
+   <parameter name="billingAddressLine1" description="The billing address line1." />
+   <parameter name="billingAddressLine2" description="The billing address line2." />
+   <parameter name="billingAddressLine3" description="The billing address line3." />
+   <parameter name="billingAddressCity" description="The billing address city." />
+   <parameter name="billingAddressStateCode" description="The billing address state code." />
+   <parameter name="billingAddressState" description="The billing address state." />
+   <parameter name="billingAddressZip" description="The billing address zip or postal code." />
+   <parameter name="billingAddressCountry" description="The billing address country." />
+   <parameter name="shippingAddressFirstName" description="The shipping address first name." />
+   <parameter name="shippingAddressLastName" description="The shipping address last name." />
+   <parameter name="shippingAddressEmail" description="The shipping address email." />
+   <parameter name="shippingAddressCompanyName" description="The shipping address company name." />
+   <parameter name="shippingAddressPhoneNumber" description="The shipping address phone number." />
+   <parameter name="shippingAddressLine1" description="The shipping address line1." />
+   <parameter name="shippingAddressLine2" description="The shipping address line2." />
+   <parameter name="shippingAddressLine3" description="The shipping address line3." />
+   <parameter name="shippingAddressCity" description="The shipping address city." />
+   <parameter name="shippingAddressStateCode" description="The shipping address state code." />
+   <parameter name="shippingAddressState" description="The shipping address state." />
+   <parameter name="shippingAddressZip" description="The shipping address zip or postal code." />
+   <parameter name="shippingAddressCountry" description="The shipping address country." />
+   <parameter name="customerVatNumber" description="The VAT number for the customer." />
+   <parameter name="addonDetails" description="The addon details including addon IDs and the quantities." />
+   <sequence>
+      <property name="uri.var.subscriptionId" expression="$func:subscriptionId" />
+      <property name="uri.var.planId" expression="$func:planId" />
+      <property name="uri.var.planQuantity" expression="$func:planQuantity" />
+      <property name="uri.var.startDate" expression="$func:startDate" />
+      <property name="uri.var.trialEndDate" expression="$func:trialEndDate" />
+      <property name="uri.var.billingCycles" expression="$func:billingCycles" />
+      <property name="uri.var.isReplaceAddonList" expression="$func:isReplaceAddonList" />
+      <property name="uri.var.couponId" expression="$func:couponId" />
+      <property name="uri.var.isProrated" expression="$func:isProrated" />
+      <property name="uri.var.isEndOfTerm" expression="$func:isEndOfTerm" />
+      <property name="uri.var.invoiceNotes" expression="$func:invoiceNotes" />
+      <property name="uri.var.cardGateway" expression="$func:cardGateway" />
+      <property name="uri.var.cardTmpToken" expression="$func:cardTmpToken" />
+      <property name="uri.var.cardFirstName" expression="$func:cardFirstName" />
+      <property name="uri.var.cardLastName" expression="$func:cardLastName" />
+      <property name="uri.var.cardNumber" expression="$func:cardNumber" />
+      <property name="uri.var.cardExpiryMonth" expression="$func:cardExpiryMonth" />
+      <property name="uri.var.cardExpiryYear" expression="$func:cardExpiryYear" />
+      <property name="uri.var.cardCVV" expression="$func:cardCVV" />
+      <property name="uri.var.cardBillingAddress1" expression="$func:cardBillingAddress1" />
+      <property name="uri.var.cardBillingAddress2" expression="$func:cardBillingAddress2" />
+      <property name="uri.var.cardBillingCity" expression="$func:cardBillingCity" />
+      <property name="uri.var.cardBillingStateCode" expression="$func:cardBillingStateCode" />
+      <property name="uri.var.cardBillingState" expression="$func:cardBillingState" />
+      <property name="uri.var.cardBillingZip" expression="$func:cardBillingZip" />
+      <property name="uri.var.cardBillingCountry" expression="$func:cardBillingCountry" />
+      <property name="uri.var.cardIpAddress" expression="$func:cardIpAddress" />
+      <property name="uri.var.billingAddressFirstName" expression="$func:billingAddressFirstName" />
+      <property name="uri.var.billingAddressLastName" expression="$func:billingAddressLastName" />
+      <property name="uri.var.billingAddressEmail" expression="$func:billingAddressEmail" />
+      <property name="uri.var.billingAddressCompanyName" expression="$func:billingAddressCompanyName" />
+      <property name="uri.var.billingAddressPhoneNumber" expression="$func:billingAddressPhoneNumber" />
+      <property name="uri.var.billingAddressLine1" expression="$func:billingAddressLine1" />
+      <property name="uri.var.billingAddressLine2" expression="$func:billingAddressLine2" />
+      <property name="uri.var.billingAddressLine3" expression="$func:billingAddressLine3" />
+      <property name="uri.var.billingAddressCity" expression="$func:billingAddressCity" />
+      <property name="uri.var.billingAddressStateCode" expression="$func:billingAddressStateCode" />
+      <property name="uri.var.billingAddressState" expression="$func:billingAddressState" />
+      <property name="uri.var.billingAddressZip" expression="$func:billingAddressZip" />
+      <property name="uri.var.billingAddressCountry" expression="$func:billingAddressCountry" />
+      <property name="uri.var.shippingAddressFirstName" expression="$func:shippingAddressFirstName" />
+      <property name="uri.var.shippingAddressLastName" expression="$func:shippingAddressLastName" />
+      <property name="uri.var.shippingAddressEmail" expression="$func:shippingAddressEmail" />
+      <property name="uri.var.shippingAddressCompanyName" expression="$func:shippingAddressCompanyName" />
+      <property name="uri.var.shippingAddressPhoneNumber" expression="$func:shippingAddressPhoneNumber" />
+      <property name="uri.var.shippingAddressLine1" expression="$func:shippingAddressLine1" />
+      <property name="uri.var.shippingAddressLine2" expression="$func:shippingAddressLine2" />
+      <property name="uri.var.shippingAddressLine3" expression="$func:shippingAddressLine3" />
+      <property name="uri.var.shippingAddressCity" expression="$func:shippingAddressCity" />
+      <property name="uri.var.shippingAddressStateCode" expression="$func:shippingAddressStateCode" />
+      <property name="uri.var.shippingAddressState" expression="$func:shippingAddressState" />
+      <property name="uri.var.shippingAddressZip" expression="$func:shippingAddressZip" />
+      <property name="uri.var.shippingAddressCountry" expression="$func:shippingAddressCountry" />
+      <property name="uri.var.customerVatNumber" expression="$func:customerVatNumber" />
+      <property name="uri.var.addonDetails" expression="$func:addonDetails" />
+      <script language="js">
+         <![CDATA[
+            // Generate request payload with optional parameters
+            var subscriptionId = mc.getProperty('uri.var.subscriptionId');
+            var planQuantity = mc.getProperty('uri.var.planQuantity');
+            var startDate = mc.getProperty('uri.var.startDate');
+            var trialEndDate = mc.getProperty('uri.var.trialEndDate');
+            var billingCycles = mc.getProperty('uri.var.billingCycles');
+            var couponId = mc.getProperty('uri.var.couponId');
+            var pONumber = mc.getProperty('uri.var.pONumber');
+            var invoiceNotes = mc.getProperty('uri.var.invoiceNotes');
+            var shippingAddressFirstName = mc.getProperty('uri.var.shippingAddressFirstName');
+            var shippingAddressLastName = mc.getProperty('uri.var.shippingAddressLastName');
+            var shippingAddressEmail = mc.getProperty('uri.var.shippingAddressEmail');
+            var shippingAddressCompanyName = mc.getProperty('uri.var.shippingAddressCompanyName');
+            var shippingAddressPhoneNumber = mc.getProperty('uri.var.shippingAddressPhoneNumber');
+            var shippingAddressLine1 = mc.getProperty('uri.var.shippingAddressLine1');
+            var shippingAddressLine2 = mc.getProperty('uri.var.shippingAddressLine2');
+            var shippingAddressLine3 = mc.getProperty('uri.var.shippingAddressLine3');
+            var shippingAddressCity = mc.getProperty('uri.var.shippingAddressCity');
+            var shippingAddressStateCode = mc.getProperty('uri.var.shippingAddressStateCode');
+            var shippingAddressState = mc.getProperty('uri.var.shippingAddressState');
+            var shippingAddressZip = mc.getProperty('uri.var.shippingAddressZip');
+            var shippingAddressCountry = mc.getProperty('uri.var.shippingAddressCountry');
+            var addonDetails = mc.getProperty('uri.var.addonDetails');
+            
+            // URI Encode the customerId parameter
+            customerId = encodeURIComponent(customerId);
+            mc.setProperty('uri.var.customerId', customerId);
+            
+            var payload = mc.getPayloadJSON();
+            payload = new Object();
+            if (subscriptionId != null && subscriptionId != "") {
+               payload.id = subscriptionId;
+            }
+            if (planQuantity != null && planQuantity != "") {
+               payload.plan_quantity = planQuantity;
+            }
+            if (startDate != null && startDate != "") {
+               payload. start_date = startDate;
+            }
+            if (trialEndDate != null && trialEndDate != "") {
+               payload.trial_end = trialEndDate;
+            }
+            if (billingCycles != null && billingCycles != "") {
+               payload.billing_cycles = billingCycles;
+            }
+            if (couponId != null && couponId != "") {
+               payload.coupon = couponId;
+            }
+            if (pONumber != null && pONumber != "") {
+               payload.po_number = pONumber;
+            }
+            if (invoiceNotes != null && invoiceNotes != "") {
+               payload.invoice_notes = invoiceNotes;
+            }
+            if (shippingAddressFirstName != null && shippingAddressFirstName != "") {
+               payload.shipping_address[first_name] = shippingAddressFirstName;
+            }
+            if (shippingAddressLastName != null && shippingAddressLastName != "") {
+               payload.shipping_address[last_name] = shippingAddressLastName;
+            }
+            if (shippingAddressEmail != null && shippingAddressEmail != "") {
+               payload.shipping_address[email] = shippingAddressEmail;
+            }
+            if (shippingAddressCompanyName != null && shippingAddressCompanyName != "") {
+               payload.shipping_address[company] = shippingAddressCompanyName;
+            }
+            if (shippingAddressPhoneNumber != null && shippingAddressPhoneNumber != "") {
+               payload.shipping_address[phone] = shippingAddressPhoneNumber;
+            }
+            if (shippingAddressLine1 != null && shippingAddressLine1 != "") {
+               payload.shipping_address[line1] = shippingAddressLine1;
+            }
+            if (shippingAddressLine2 != null && shippingAddressLine2 != "") {
+               payload.shipping_address[line2] = shippingAddressLine2;
+            }
+            if (shippingAddressLine3 != null && shippingAddressLine3 != "") {
+               payload.shipping_address[line3] = shippingAddressLine3;
+            }
+            if (shippingAddressCity != null && shippingAddressCity != "") {
+               payload.shipping_address[city] = shippingAddressCity;
+            }
+            if (shippingAddressStateCode != null && shippingAddressStateCode != "") {
+               payload.shipping_address[state_code] = shippingAddressStateCode;
+            }
+            if (shippingAddressState != null && shippingAddressState != "") {
+               payload.shipping_address[state] = shippingAddressState;
+            }
+            if (shippingAddressZip != null && shippingAddressZip != "") {
+               payload.shipping_address[zip] = shippingAddressZip;
+            }
+            if (shippingAddressCountry != null && shippingAddressCountry != "") {
+               payload.shipping_address[country] = shippingAddressCountry;
+            }
+                 
+            // TODO: Setting parameters
+                        
+            mc.setPayloadJSON(payload);
+            // Count whether any parameter exists in the payload.
+            var payloadParamCount = 0;
+            for(var prop in payload) {
+               if (payload.hasOwnProperty(prop)) {
+                  payloadParamCount = 1;
+                  break;
+               }
+            }
+            mc.setProperty('payloadParamCount', payloadParamCount);
+         ]]>
+      </script>
+      <filter xpath="get-property('payloadFlag') = '1'">
+         <then>
+            <property name="messageType" value="application/x-www-form-urlencoded" scope="axis2" />
+         </then>
+      </filter>
+      <call>
+         <endpoint>
+            <http method="post" uri-template="{uri.var.apiUrl}/subscriptions/{uri.var.subscriptionId}" />
+         </endpoint>
+      </call>
+   </sequence>
+</template>

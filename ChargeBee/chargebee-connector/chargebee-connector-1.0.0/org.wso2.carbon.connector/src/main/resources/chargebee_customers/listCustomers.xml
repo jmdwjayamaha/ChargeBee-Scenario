@@ -16,6 +16,7 @@
    specific language governing permissions and limitations
    under the License.
 -->
+<!-- API Doc: https://apidocs.chargebee.com/docs/api/customers#list_customers -->
 <template name="listCustomers" xmlns="http://ws.apache.org/ns/synapse">
    <parameter name="limit" description="The number of results per page." />
    <parameter name="offset" description="The offset value for pagination." />
@@ -35,7 +36,7 @@
                expression="fn:concat(get-property('uri.var.apiParameters'),'offset=',get-property('uri.var.offset'), '&amp;')" />
          </then>
       </filter>
-      <filter xpath="fn:string-length(get-property('uri.var.apiParameters')) > 0">
+      <filter xpath="boolean(get-property('uri.var.apiParameters'))">
          <then>
             <property name="uri.var.apiParameters"
                expression="fn:concat('?', fn:substring(get-property('uri.var.apiParameters'), 1, fn:string-length(get-property('uri.var.apiParameters'))-1))" />
@@ -46,5 +47,7 @@
             <http method="get" uri-template="{uri.var.apiUrl}/customers{uri.var.apiParameters}" />
          </endpoint>
       </call>
+      <!-- Remove response custom header information -->
+      <header name="WWW-Authenticate" scope="transport" action="remove" />
    </sequence>
 </template>
