@@ -64,6 +64,21 @@
                <loopback />
             </then>
          </filter>
+         
+         <!-- Provide the next offset value for the pagination purposes -->
+         <property name="charebeeOffsetValue" expression="//jsonObject/next_offset/text()" /> 
+         <filter xpath="boolean(get-property('charebeeOffsetValue'))">
+            <then>
+               <property name="status" value="Success" /> 
+               <property name="message" 
+                  expression="fn:concat('To get the next invoice list use this offset value: ',get-property('charebeeOffsetValue'))" /> 
+               <call-template target="responseHandlerTemplate"> 
+                  <with-param name="activity" value="charegbee_listInvoices" /> 
+                  <with-param name="status" value="{$ctx:Status}" /> 
+                  <with-param name="message" value="{$ctx:message}" /> 
+               </call-template>
+            </then>
+         </filter>
 
          <iterate id="invoiceIterator" expression="//invoice" sequential="true" continueParent="true"
             preservePayload="true">
@@ -77,7 +92,8 @@
                         <property name="selectedInvoices" expression="get-property('operation', 'selectedInvoices') + 1" scope="operation" />
                         
                         <property name="invoiceId" expression="//id" />
-                        <property name="discountAmount" expression="sum(//discounts/amount)" />
+                        <property name="discountAmountCents" expression="sum(//discounts/amount)" />
+                        <property name="discountAmount" expression="get-property('discountAmountCents') div 100" />
                         <property name="customerId" expression="//customer_id" />
                         
                         <property name="lineItemCount" expression="count(//line_items)" />
@@ -124,9 +140,9 @@
                                  <then>
                                     <property name="id" expression="fn:concat('chargebeeInvoiceId:', get-property('invoiceId'))" />
                                     <property name="errorMessage" expression="//Message/text()" />
-                                    <property name="errorMessage" expression="fn:concat('Cannot check the existence of client in ChargeBee. Error: ', get-property('errorMessage'))" />
+                                    <property name="errorMessage" expression="fn:concat('(',$axis2:HTTP_SC,'), ','Cannot check the existence of the client in Billiving. Error: ', get-property('errorMessage'))" />
                                     <call-template target="responseHandlerTemplate">
-                                       <with-param name="activity" value="billiving_createInvoice" />
+                                       <with-param name="activity" value="billiving_createClient" />
                                        <with-param name="id" value="{$ctx:id}" />
                                        <with-param name="status" value="Error" />
                                        <with-param name="message" value="{$ctx:errorMessage}" />
@@ -163,10 +179,9 @@
                                     <filter xpath="get-property('responseStatus') != 200">
                                        <then>
                                           <property name="id" expression="fn:concat('chargebeeInvoiceId:', get-property('invoiceId'))" />
-                                          <property name="apiErrorMessage" expression="//Message/text()" />
-                                          <property name="errorMessage" expression="fn:concat('Cannot create client in Billiving. Error: ', get-property('apiErrorMessage'))" />
+                                          <property name="errorMessage" expression="fn:concat('(',$axis2:HTTP_SC,'), ','Cannot create client in Billiving')" />
                                           <call-template target="responseHandlerTemplate">
-                                             <with-param name="activity" value="billiving_createInvoice" />
+                                             <with-param name="activity" value="billiving_createClient" />
                                              <with-param name="id" value="{$ctx:id}" />
                                              <with-param name="status" value="Error" />
                                              <with-param name="message" value="{$ctx:errorMessage}" />
@@ -185,9 +200,9 @@
                                           </payloadFactory>
                                           
                                           <property name="lineItemCount" expression="get-property('operation','lineItemCount') + get-property('lineItemCount')" scope="operation" />
-                                          <property name="docItemsArray" value="[]" scope="operation" />
+                                          <property name="docItemsArray" value="[" scope="operation" />
                                        
-                                          <iterate continueParent="false" id="lineItems" expression="//line_items" sequential="true">
+                                          <iterate continueParent="true" id="lineItems" expression="//line_items" sequential="true">
                                              <target>
                                                 <sequence>
                                                    <property name="itemId" expression="//entity_id" />
@@ -195,7 +210,7 @@
                                                    <property name="itemQuantity" expression="//quantity" />
                                                    <property name="itemDescription" expression="//description" />
                                                    
-                                                   <!-- Generate the JSON object to be sent -->
+                                                   <!-- Generate the DocItem JSON object to be sent -->
                                                    <property name="docItemsArray" expression="get-property('operation','docItemsArray')" />
                                                    <script language="js">
                                                       <![CDATA[
@@ -205,79 +220,89 @@
                                                          var itemQuantity = mc.getProperty('itemQuantity');
                                                          var itemDescription = mc.getProperty('itemDescription');
                                                          
-                                                         var docItem = new Object();
+                                                         var docItem = '{';
                                                          
                                                          if (itemId != null && itemId != "") {
-                                                            docItem.ItemId = itemId;
+                                                            docItem += '"ItemId" : "' + itemId + '",';
                                                          }
                                                          if (itemAmount != null && itemAmount != "") {
-                                                            docItem.ItemPrice = itemAmount;
+                                                            docItem += '"ItemPrice" : "' + (itemAmount / 100) + '",';
                                                          }
                                                          if (itemQuantity != null && itemQuantity != "") {
-                                                            docItem.ItemQuantity = itemQuantity;
+                                                            docItem += '"ItemQuantity" : "' + itemQuantity + '",';
                                                          }
                                                          if (itemDescription != null && itemDescription != "") {
-                                                            docItem.ItemDescription = itemDescription;
+                                                            docItem += '"ItemDescription" : "' + itemDescription + '",';
                                                          }
-                                                         
-                                                         var docItems = eval("(" + docItemsArray + ")");
-                                                         docItems[docItems.length] = docItem;
-                                                         print("DOC ITEM: " + docItem.ItemQuantity);
-                                                         print("DOC ITEMS: " + docItems[0].ItemQuantity);
-                                                         mc.setProperty('docItemsArray', docItems);
+
+                                                         if (docItem != "") {
+                                                            docItem = docItem.substring(0, docItem.length - 1) + '},';
+                                                         } 
+
+                                                         mc.setProperty('docItemsArray', docItemsArray + docItem);
                                                       ]]>
                                                    </script>
+
                                                    <property name="docItemsArray" expression="get-property('docItemsArray')" scope="operation" />
                                                    
-                                                   <log>
-                                                      <property name="@@@@@@LKJLKJLJK" expression="get-property('docItemsArray')" />
-                                                   </log>
-
                                                    <property name="lineItemIndex" expression="get-property('operation','lineItemIndex') + 1"
                                                       scope="operation" />
+
                                                 </sequence>
                                              </target>
                                           </iterate>
-                                       
-                                          <!-- TODO: Create Invoice In Billiving -->
-                                                                                   
-                                          <property name="errorMessage" expression="//*[local-name()='error']/text()" />
-                                          <!-- Halt the process if there is any error in creation of the client -->
-                                          <filter source="boolean(get-property('errorMessage'))" regex="true">
+
+                                          <property name="docItemsArray" expression="get-property('operation', 'docItemsArray')" />
+                                          <filter xpath="fn:string-length(get-property('docItemsArray')) > 0">
                                              <then>
-                                                <property name="id" expression="fn:concat('recurlyInvoiceId:', get-property('invoiceId'))" />
-                                                <property name="errorMessage" expression="fn:concat('Cannot create invoice in Freshbooks. Error: ', get-property('errorMessage'))" />
+                                                <property name="docItemsArray"
+                                                   expression="fn:concat(fn:substring(get-property('docItemsArray'), 1, fn:string-length(get-property('docItemsArray'))-1), ']')" />
+                                             </then>
+                                          </filter>
+                                          
+                                          <billiving.init>
+                                             <apiUrl>{$ctx:billivingApiUrl}</apiUrl>
+                                             <accessToken>{$ctx:billivingAccessToken}</accessToken>
+                                          </billiving.init>
+                                          <billiving.createInvoice>
+                                             <referenceNumber>{$ctx:invoiceId}</referenceNumber>
+                                             <clientId>{$ctx:billivingClientId}</clientId>
+                                             <discount>{$ctx:discountAmount}</discount>
+                                             <id></id>
+                                             <docItems>{$ctx:docItemsArray}</docItems>
+                                          </billiving.createInvoice>
+
+                                          <property name="responseStatus" expression="$axis2:HTTP_SC" />
+                                          <filter xpath="get-property('responseStatus') != 200">
+                                             <then>
+                                                <property name="id" expression="fn:concat('chargebeeInvoiceId:', get-property('invoiceId'))" />
+                                                <property name="errorMessage" expression="fn:concat('(',$axis2:HTTP_SC,'), ','Cannot create invoice in Billiving')" />
                                                 <call-template target="responseHandlerTemplate">
-                                                   <with-param name="activity" value="freshbooks_createPayment" />
+                                                   <with-param name="activity" value="billiving_createInvoice" />
                                                    <with-param name="id" value="{$ctx:id}" />
                                                    <with-param name="status" value="Error" />
                                                    <with-param name="message" value="{$ctx:errorMessage}" />
                                                 </call-template>
-                                                
-                                                <property name="adjustmentCount"
-                                                   expression="get-property('operation','adjustmentCount') - get-property('currentAdjustmentCount')"  scope="operation" />
                                              </then>
                                              <else>
-                                                <property name="freshbooksInvoiceId" expression="//*[local-name()='invoice_id']/text()" />
+                                                <property name="billivingInvoiceId" expression="//Id" />
                                                
                                                 <property name="id"
-                                                   expression="fn:concat('recurlyInvoiceId:', get-property('invoiceId'), ',freshbooksInvoiceId:', get-property('freshbooksInvoiceId'))" />
-                                                <property name="errorMessage"
-                                                   value="Recurly invoice was successfully created in Freshbooks. But no adjustments found for the Recurly invoice" />
+                                                   expression="fn:concat('chargebeeInvoiceId:', get-property('invoiceId'), ',billivingInvoiceId:', get-property('billivingInvoiceId'))" />
+                                                <property name="errorMessage" value="ChargeBee invoice was successfully created in Billiving" />
                                                 <call-template target="responseHandlerTemplate">
-                                                   <with-param name="activity" value="freshbooks_createPayment" />
+                                                   <with-param name="activity" value="billiving_createInvoice" />
                                                    <with-param name="id" value="{$ctx:id}" />
-                                                   <with-param name="status" value="Skipped" />
+                                                   <with-param name="status" value="Success" />
                                                    <with-param name="message" value="{$ctx:errorMessage}" />
                                                 </call-template>
-                                                 
                                              </else>
                                           </filter>
                                        </else>
                                     </filter>
                                  </else>
                               </filter>
-                              
+
                               <property name="invoiceIndex" expression="get-property('operation','invoiceIndex') + 1" scope="operation" />
                               
                            </else>

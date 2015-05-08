@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2005-2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_mangeContacts" transports="https,http" statistics="disable"
+   trace="disable" startOnLoad="true">
+   <target>
+      <inSequence onError="faultHandlerSeq">
+
+
+         <!-- ChargeBee parameters. -->
+         <property name="chargeBeeApiUrl" expression="json-eval($.chargeBeeApiUrl)" />
+         <property name="chargeBeeApiKey" expression="json-eval($.chargeBeeApiKey)" />
+         <property name="chargeBeeLimit" expression="json-eval($.chargeBeeLimit)" />
+         <property name="chargeBeeOffset" expression="json-eval($.chargeBeeOffset)" />
+         <property name="chargeBeeStartTime" expression="json-eval($.chargeBeeStartTime)" />
+         <property name="chargeBeeEndTime" expression="json-eval($.chargeBeeEndTime)" />
+         <property name="chargeBeeWebhookStatus" expression="json-eval($.chargeBeeWebhookStatus)" />
+         <property name="chargeBeeEventType" expression="json-eval($.chargeBeeEventType)" />
+         <!-- ZOHO CRM parameters. -->
+         <property name="zohoCRMAccessToken" expression="json-eval($.zohoCRMAccessToken)" />
+         <property name="zohoCRMApiUrl" expression="json-eval($.zohoCRMApiUrl)" />
+         <!-- MailChimp parameters. -->
+         <property name="mailChimpApiUrl" expression="json-eval($.mailChimpApiUrl)" />
+         <property name="mailChimpApiKey" expression="json-eval($.mailChimpApiKey)" />
+
+         <!-- Get subscriptions. -->
+         <chargebee.init>
+            <apiUrl>{$ctx:chargeBeeApiUrl}</apiUrl>
+            <apiKey>{$ctx:chargeBeeApiKey}</apiKey>
+         </chargebee.init>
+         <chargebee.listEvents>
+            <limit>{$ctx:chargeBeeLimit}</limit>
+            <offset>{$ctx:chargeBeeOffset}</offset>
+            <startTime>{$ctx:chargeBeeStartTime}</startTime>
+            <endTime>{$ctx:chargeBeeEndTime}</endTime>
+            <webhookStatus>{$ctx:chargeBeeWebhookStatus}</webhookStatus>
+            <eventType>{$ctx:chargeBeeEventType}</eventType>
+         </chargebee.listEvents>
+         <filter source="$axis2:HTTP_SC" regex="200">
+            <then>
+               <property name="noSubscriptions" expression="count(//jsonObject/list/event)" scope="operation" />
+               <property name="subscriptionIndex" value="0" scope="operation" />
+               <!-- Check if there are subscriptions. -->
+               <filter xpath="get-property('operation', 'noSubscriptions') = 0">
+                  <then>
+                     <property name="status" value="cancelled" />
+                     <property name="message" value="No subscriptions are found." />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="charegBee_getSubscriptions" />
+                        <with-param name="status" value="{$ctx:status}" />
+                        <with-param name="message" value="{$ctx:message}" />
+                     </call-template>
+                     <loopback />
+                  </then>
+               </filter>
+               <property name="charebeeOffsetValue" expression="//jsonObject/next_offset/text()" />
+               <filter xpath="boolean(get-property('charebeeOffsetValue'))">
+                  <then>
+                     <property name="status" value="Success" />
+                     <property name="message"
+                        expression="fn:concat('To get the next subscriber list use this offset value :',get-property('charebeeOffsetValue'))" />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="charegBee_getSubscriptions" />
+                        <with-param name="status" value="{$ctx:status}" />
+                        <with-param name="message" value="{$ctx:message}" />
+                     </call-template>
+                  </then>
+               </filter>
+               <iterate continueParent="true" id="clicker" expression="//jsonObject/list/event" sequential="true">
+                  <target>
+                     <sequence>
+                        <property name="chargeBeePlanId" expression="//event/content/subscription/plan_id/text()" />
+                        <property name="chargeBeeCustomerId" expression="//event/content/customer/id/text()" />
+                        <property name="chargeBeeCustomerFirstName" expression="//event/content/customer/first_name/text()" />
+                        <property name="chargeBeeCustomerLastName" expression="//event/content/customer/last_name/text()" />
+                        <property name="chargeBeeCustomerEmail" expression="//event/content/customer/email/text()" />
+                        <property name="chargeBeeCustomerPhone" expression="//event/content/customer/phone/text()" />
+                        <property name="chargeBeeCustomerCompany" expression="//event/content/customer/company/text()" />
+                        <property name="chargeBeeCustomerCity" expression="//event/content/customer/billing_address/city/text()" />
+                        <property name="chargeBeeCustomerState" expression="//event/content/customer/billing_address/state/text()" />
+                        <property name="chargeBeeCustomerZip" expression="//event/content/customer/billing_address/zip/text()" />
+                        <property name="chargeBeeCustomerLine1" expression="//event/content/customer/billing_address/line1/text()" />
+                        <property name="chargeBeeCustomerLine2" expression="//event/content/customer/billing_address/line2/text()" />
+                        <property name="chargeBeeCustomerLine3" expression="//event/content/customer/billing_address/line3/text()" />
+                        <property name="chargeBeeAddress"
+                           expression="fn:concat(get-property('chargeBeeCustomerLine1'),', ',get-property('chargeBeeCustomerLine2'),', ',get-property('chargeBeeCustomerLine3'))" />
+                        <!-- Get plan details. -->
+                        <chargebee.init>
+                           <apiUrl>{$ctx:chargeBeeApiUrl}</apiUrl>
+                           <apiKey>{$ctx:chargeBeeApiKey}</apiKey>
+                        </chargebee.init>
+                        <chargebee.getPlan>
+                           <planId>{$ctx:chargeBeePlanId}</planId>
+                        </chargebee.getPlan>
+                        <filter source="$axis2:HTTP_SC" regex="200">
+                           <then>
+                              <property name="chargeBeePlanPrice" expression="//jsonObject/plan/price/text()" />
+                              <property name="zohoCRMXmlData"
+                                 expression="fn:concat('&lt;row no=&quot;1&quot;&gt;&lt;FL val=&quot;Company&quot;&gt;',get-property('chargeBeeCustomerCompany'),'&lt;/FL&gt;&lt;FL val=&quot;First Name&quot;&gt;',get-property('chargeBeeCustomerFirstName'),'&lt;/FL&gt;&lt;FL val=&quot;Last Name&quot;&gt;',get-property('chargeBeeCustomerLastName'),'&lt;/FL&gt;&lt;FL val=&quot;Email&quot;&gt;',get-property('chargeBeeCustomerEmail'),'&lt;/FL&gt;&lt;FL val=&quot;Phone&quot;&gt;',get-property('chargeBeeCustomerPhone'),'&lt;/FL&gt;')" />
+                              <filter xpath="get-property('chargeBeePlanPrice') = 0">
+                                 <then>
+                                    <property name="zohoCRMModule" value="Leads" />
+                                    <property name="zohoCRMActivity" value="zohoCRM_createLead" />
+                                    <property name="zohoCRMAMessage" value="Lead created successfully." />
+                                    <property name="zohoCRMXmlData"
+                                       expression="fn:concat('&lt;Leads&gt;',get-property('zohoCRMXmlData'),'&lt;FL val=&quot;Street&quot;&gt;',get-property('chargeBeeAddress'),'&lt;/FL&gt;&lt;FL val=&quot;City&quot;&gt;',get-property('chargeBeeCustomerCity'),'&lt;/FL&gt;&lt;FL val=&quot;State&quot;&gt;',get-property('chargeBeeCustomerState'),'&lt;/FL&gt;&lt;FL val=&quot;Zip Code&quot;&gt;',get-property('chargeBeeCustomerZip'),'&lt;/FL&gt;;&lt;/row&gt;&lt;/Leads&gt;')" />
+                                 </then>
+                                 <else>
+                                    <property name="zohoCRMModule" value="Contacts" />
+                                    <property name="zohoCRMActivity" value="zohoCRM_createContact" />
+                                    <property name="zohoCRMAMessage" value="Contact created successfully." />
+                                    <property name="zohoCRMXmlData"
+                                       expression="fn:concat('&lt;Contacts&gt;',get-property('zohoCRMXmlData'),'&lt;FL val=&quot;Mailing Street&quot;&gt;',get-property('chargeBeeAddress'),'&lt;/FL&gt;&lt;FL val=&quot;Mailing City&quot;&gt;',get-property('chargeBeeCustomerCity'),'&lt;/FL&gt;&lt;FL val=&quot;Mailing State&quot;&gt;',get-property('chargeBeeCustomerState'),'&lt;/FL&gt;&lt;FL val=&quot;Mailing Zip&quot;&gt;',get-property('chargeBeeCustomerZip'),'&lt;/FL&gt;&lt;/row&gt;&lt;/Contacts&gt;')" />
+                                 </else>
+                              </filter>
+                              <!-- Insert record. -->
+                              <zohocrm.init>
+                                 <scope>crmapi</scope>
+                                 <accessToken>{$ctx:zohoCRMAccessToken}</accessToken>
+                                 <apiUrl>{$ctx:zohoCRMApiUrl}</apiUrl>
+                              </zohocrm.init>
+                              <zohocrm.insertRecords>
+                                 <moduleType>{$ctx:zohoCRMModule}</moduleType>
+                                 <duplicateCheck>1</duplicateCheck>
+                                 <xmlData>{$ctx:zohoCRMXmlData}</xmlData>
+                              </zohocrm.insertRecords>
+
+                              <property name="zohoCRMResults" expression="//jsonObject/response/result" />
+                              <property name="zohoCRMError" expression="//jsonObject/response/error" />
+
+                              <filter xpath="boolean(get-property('zohoCRMResults'))">
+                                 <then>
+                                    <property name="zohoCRMCreationResult" expression="//jsonObject/response/result/message/text()" />
+                                    <filter xpath="get-property('zohoCRMCreationResult') = 'Record(s) added successfully'">
+                                       <then>
+                                          <property name="id"
+                                             expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'))" />
+                                          <property name="status" value="Success" />
+                                          <call-template target="responseHandlerTemplate">
+                                             <with-param name="activity" value="{$ctx:zohoCRMActivity}" />
+                                             <with-param name="id" value="{$ctx:id}" />
+                                             <with-param name="status" value="{$ctx:status}" />
+                                             <with-param name="message" value="{$ctx:zohoCRMAMessage}" />
+                                          </call-template>
+                                       </then>
+                                       <else>
+                                          <property name="id"
+                                             expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'))" />
+                                          <property name="status" value="Failed" />
+                                          <property name="message" expression="//jsonObject/response/result/message/text()" />
+                                          <call-template target="responseHandlerTemplate">
+                                             <with-param name="activity" value="{$ctx:zohoCRMActivity}" />
+                                             <with-param name="id" value="{$ctx:id}" />
+                                             <with-param name="status" value="{$ctx:status}" />
+                                             <with-param name="message" value="{$ctx:message}" />
+                                          </call-template>
+                                       </else>
+                                    </filter>
+                                    <!-- Check subscriber list exists. -->
+                                    <mailchimp.init>
+                                       <apiUrl>{$ctx:mailChimpApiUrl}</apiUrl>
+                                       <apiKey>{$ctx:mailChimpApiKey}</apiKey>
+                                       <format>json</format>
+                                    </mailchimp.init>
+                                    <mailchimp.listSubscriberLists>
+                                       <listName>{$ctx:chargeBeePlanId}</listName>
+                                    </mailchimp.listSubscriberLists>
+                                    <property name="mailChimpListId" expression="//jsonObject/data[1]/id/text()" />
+                                    <filter xpath="boolean(get-property('mailChimpListId'))">
+                                       <then>
+
+                                          <payloadFactory media-type="json">
+                                             <format>
+                                                {
+                                                "mailChimpBatch":[{"email":{"email":"$1"}}]
+                                                }
+                                             </format>
+                                             <args>
+                                                <arg expression="get-property('chargeBeeCustomerEmail')" />
+                                             </args>
+                                          </payloadFactory>
+                                          <property name="mailChimpBatch" expression="json-eval($.mailChimpBatch)" />
+                                          <!-- Add subscriber to list. -->
+                                          <mailchimp.init>
+                                             <apiUrl>{$ctx:mailChimpApiUrl}</apiUrl>
+                                             <apiKey>{$ctx:mailChimpApiKey}</apiKey>
+                                             <format>json</format>
+                                          </mailchimp.init>
+                                          <mailchimp.addSubscribersToList>
+                                             <listId>{$ctx:mailChimpListId}</listId>
+                                             <batch>{$ctx:mailChimpBatch}</batch>
+                                          </mailchimp.addSubscribersToList>
+                                          <property name="mailChimpResult" expression="//jsonObject/adds" />
+                                          <filter xpath="boolean(get-property('mailChimpResult'))">
+                                             <then>
+                                                <property name="id"
+                                                   expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'),',Plan ID:', get-property('chargeBeePlanId'))" />
+                                                <property name="status" value="Success" />
+                                                <property name="message"
+                                                   expression="fn:concat('Contact was successfully added to ',get-property('chargeBeePlanId'),' subscriber list')" />
+                                                <call-template target="responseHandlerTemplate">
+                                                   <with-param name="activity" value="mailChimp_addSubscriptionToList" />
+                                                   <with-param name="id" value="{$ctx:id}" />
+                                                   <with-param name="status" value="{$ctx:status}" />
+                                                   <with-param name="message" value="{$ctx:message}" />
+                                                </call-template>
+                                             </then>
+                                             <else>
+                                                <property name="id"
+                                                   expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'),',Plan ID:', get-property('chargeBeePlanId'))" />
+                                                <property name="status" value="Failed" />
+                                                <property name="errorMessage" expression="//jsonObject/error/text()" />
+                                                <filter xpath="boolean(get-property('errorMessage'))">
+                                                   <then>
+                                                      <property name="message" expression="get-property('errorMessage')" />
+                                                   </then>
+                                                   <else>
+                                                      <property name="message" expression="//jsonObject/errors[1]/error/text()" />
+                                                   </else>
+                                                </filter>
+                                                <call-template target="responseHandlerTemplate">
+                                                   <with-param name="activity" value="mailChimp_addSubscriptionToList" />
+                                                   <with-param name="id" value="{$ctx:id}" />
+                                                   <with-param name="status" value="{$ctx:status}" />
+                                                   <with-param name="message" value="{$ctx:message}" />
+                                                </call-template>
+                                             </else>
+                                          </filter>
+                                       </then>
+                                       <else>
+                                          <property name="mailChimpError" expression="//jsonObject/error/text()" />
+                                          <filter xpath="boolean(get-property('mailChimpError'))">
+                                             <then>
+                                                <property name="message" expression="get-property('mailChimpError')" />
+                                             </then>
+                                             <else>
+                                                <property name="message"
+                                                   value="No matching subscriber list found for the plan." />
+                                             </else>
+                                          </filter>
+                                          <property name="id"
+                                             expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'),',Plan ID:', get-property('chargeBeePlanId'))" />
+                                          <property name="status" value="Failed" />
+                                          <call-template target="responseHandlerTemplate">
+                                             <with-param name="activity" value="mailChimp_addSubscriptionToList" />
+                                             <with-param name="id" value="{$ctx:id}" />
+                                             <with-param name="status" value="{$ctx:status}" />
+                                             <with-param name="message" value="{$ctx:message}" />
+                                          </call-template>
+                                       </else>
+                                    </filter>
+                                 </then>
+                                 <else>
+                                    <property name="id"
+                                       expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'))" />
+                                    <property name="status" value="Failed" />
+                                    <property name="message" expression="//jsonObject/response/error/message/text()" />
+                                    <call-template target="responseHandlerTemplate">
+                                       <with-param name="activity" value="{$ctx:zohoCRMActivity}" />
+                                       <with-param name="id" value="{$ctx:id}" />
+                                       <with-param name="status" value="{$ctx:status}" />
+                                       <with-param name="message" value="{$ctx:message}" />
+                                    </call-template>
+                                 </else>
+                              </filter>
+                           </then>
+                           <else>
+                              <property name="id" expression="fn:concat('Plan ID :',get-property('chargeBeePlanId'))" />
+                              <property name="status" value="Failed" />
+                              <property name="message" expression="//jsonObject/message/text()" />
+                              <call-template target="responseHandlerTemplate">
+                                 <with-param name="activity" value="charegBee_getSubscriptions" />
+                                 <with-param name="id" value="{$ctx:id}" />
+                                 <with-param name="status" value="{$ctx:status}" />
+                                 <with-param name="message" value="{$ctx:message}" />
+                              </call-template>
+                           </else>
+                        </filter>
+                        <property name="subscriptionIndex" expression="get-property('operation','subscriptionIndex') + 1"
+                           scope="operation" />
+                     </sequence>
+                  </target>
+               </iterate>
+               <filter xpath="(get-property('operation', 'noSubscriptions') = get-property('operation', 'subscriptionIndex'))">
+                  <then>
+                     <loopback />
+                  </then>
+               </filter>
+            </then>
+            <else>
+               <property name="status" value="Failed" />
+               <property name="message" expression="//jsonObject/message/text()" />
+               <call-template target="responseHandlerTemplate">
+                  <with-param name="activity" value="charegBee_getSubscriptions" />
+                  <with-param name="status" value="{$ctx:status}" />
+                  <with-param name="message" value="{$ctx:message}" />
+               </call-template>
+               <loopback />
+            </else>
+         </filter>
+      </inSequence>
+      <outSequence>
+         <payloadFactory media-type="json">
+            <format>
+               {
+               "Response":{
+               "activity":"chargebee_manageContacts",
+               "activityResponse":[$1]
+               }
+               }
+            </format>
+            <args>
+               <arg expression="get-property('operation','responseString')" />
+            </args>
+         </payloadFactory>
+         <property name="messageType" value="application/json" scope="axis2" />
+         <send />
+      </outSequence>
+   </target>
+   <description />
+</proxy>

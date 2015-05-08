@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2005-2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_sendPlanCampaign" transports="https,http"
+   statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <inSequence onError="faultHandlerSeq">
+
+
+         <!-- ChargeBee parameters. -->
+         <property name="chargeBeeApiUrl" expression="json-eval($.chargeBeeApiUrl)" />
+         <property name="chargeBeeApiKey" expression="json-eval($.chargeBeeApiKey)" />
+         <property name="chargeBeePlanId" expression="json-eval($.chargeBeePlanId)" />
+         <property name="chargeBeePlanName" expression="json-eval($.chargeBeePlanName)" />
+         <property name="chargeBeeInvoiceName" expression="json-eval($.chargeBeeInvoiceName)" />
+         <property name="chargeBeeDescription" expression="json-eval($.chargeBeeDescription)" />
+         <property name="chargeBeeTrialPeriod" expression="json-eval($.chargeBeeTrialPeriod)" />
+         <property name="chargeBeeTrialPeriodUnit" expression="json-eval($.chargeBeeTrialPeriodUnit)" />
+         <property name="chargeBeePeriod" expression="json-eval($.chargeBeePeriod)" />
+         <property name="chargeBeePeriodUnit" expression="json-eval($.chargeBeePeriodUnit)" />
+         <property name="chargeBeeSetupCost" expression="json-eval($.chargeBeeSetupCost)" />
+         <property name="chargeBeePrice" expression="json-eval($.chargeBeePrice)" />
+         <property name="chargeBeeBillingCycles" expression="json-eval($.chargeBeeBillingCycles)" />
+         <property name="chargeBeeChargeModel" expression="json-eval($.chargeBeeChargeModel)" />
+         <property name="chargeBeeFreeQuantity" expression="json-eval($.chargeBeeFreeQuantity)" />
+         <property name="chargeBeeDowngradePenalty" expression="json-eval($.chargeBeeDowngradePenalty)" />
+         <property name="chargeBeeRedirectUrl" expression="json-eval($.chargeBeeRedirectUrl)" />
+         <property name="chargeBeeEnabledInHostedPages" expression="json-eval($.chargeBeeEnabledInHostedPages)" />
+         <property name="chargeBeeInvoiceNotes" expression="json-eval($.chargeBeeInvoiceNotes)" />
+         <!-- MailChimp parameters. -->
+         <property name="mailChimpApiUrl" expression="json-eval($.mailChimpApiUrl)" />
+         <property name="mailChimpApiKey" expression="json-eval($.mailChimpApiKey)" />
+         <property name="mailChimpListID" expression="json-eval($.mailChimpListID)" />
+         <property name="mailChimpCampaignFromEmail" expression="json-eval($.mailChimpCampaignFromEmail)" />
+         <property name="mailChimpCampaignFromName" expression="json-eval($.mailChimpCampaignFromName)" />
+
+         <!-- Create Plan. -->
+         <chargebee.init>
+            <apiUrl>{$ctx:chargeBeeApiUrl}</apiUrl>
+            <apiKey>{$ctx:chargeBeeApiKey}</apiKey>
+         </chargebee.init>
+         <chargebee.createPlan>
+            <planId>{$ctx:chargeBeePlanId}</planId>
+            <planName>{$ctx:chargeBeePlanName}</planName>
+            <invoiceName>{$ctx:chargeBeeInvoiceName}</invoiceName>
+            <description>{$ctx:chargeBeeDescription}</description>
+            <trialPeriod>{$ctx:chargeBeeTrialPeriod}</trialPeriod>
+            <trialPeriodUnit>{$ctx:chargeBeeTrialPeriodUnit}</trialPeriodUnit>
+            <period>{$ctx:chargeBeePeriod}</period>
+            <periodUnit>{$ctx:chargeBeePeriodUnit}</periodUnit>
+            <setupCost>{$ctx:chargeBeeSetupCost}</setupCost>
+            <price>{$ctx:chargeBeePrice}</price>
+            <billingCycles>{$ctx:chargeBeeBillingCycles}</billingCycles>
+            <chargeModel>{$ctx:chargeBeeChargeModel}</chargeModel>
+            <freeQuantity>{$ctx:chargeBeeFreeQuantity}</freeQuantity>
+            <downgradePenalty>{$ctx:chargeBeeDowngradePenalty}</downgradePenalty>
+            <redirectUrl>{$ctx:chargeBeeRedirectUrl}</redirectUrl>
+            <enabledInHostedPages>{$ctx:chargeBeeEnabledInHostedPages}</enabledInHostedPages>
+            <invoiceNotes>{$ctx:chargeBeeInvoiceNotes}</invoiceNotes>
+         </chargebee.createPlan>
+         <filter source="$axis2:HTTP_SC" regex="200">
+            <then>
+               <property name="id" expression="fn:concat('Plan ID :',get-property('chargeBeePlanId'))" />
+               <property name="message" value="Plan successfully created." />
+               <property name="status" value="Success" />
+               <call-template target="responseHandlerTemplate">
+                  <with-param name="activity" value="chargeBee_createPlan" />
+                  <with-param name="id" value="{$ctx:id}" />
+                  <with-param name="status" value="{$ctx:status}" />
+                  <with-param name="message" value="{$ctx:message}" />
+               </call-template>
+               <script language="js">
+               <![CDATA[
+                  var planId = encodeURIComponent(mc.getProperty('chargeBeePlanId'));
+                  mc.setProperty('chargeBeePlanIdEncorded', planId);
+               ]]>
+               </script>
+               <property name="chargeBeePlanLink"
+                  expression="fn:concat(get-property('chargeBeeApiUrl'),'/hosted_pages/plans/',get-property('chargeBeePlanIdEncorded'))" />
+               <property name="mailChimpCampaignText"
+                  expression="fn:concat('Dear User,\n\n This is to inform that we have introduced a ', get-property('chargeBeePlanName'),' plan, which you might be interested in.\n\n To subscribe please click on ', get-property('chargeBeePlanLink'))" />
+               <property name="mailChimpCampaignSubject" expression="fn:concat('Newest Plan:', get-property('chargeBeePlanName'))" />
+               <payloadFactory media-type="json">
+                  <format>
+                     {
+                     "mailChimpOptions":{
+                     "list_id":"$1",
+                     "subject":"$2",
+                     "from_email":"$3",
+                     "from_name":"$4",
+                     "title":"$5"
+                     },
+                     "mailChimpContent":{
+                     "text":"$6"
+                     }
+                     }
+                  </format>
+                  <args>
+                     <arg expression="get-property('mailChimpListID')" />
+                     <arg expression="get-property('mailChimpCampaignSubject')" />
+                     <arg expression="get-property('mailChimpCampaignFromEmail')" />
+                     <arg expression="get-property('mailChimpCampaignFromName')" />
+                     <arg expression="get-property('chargeBeePlanName')" />
+                     <arg expression="get-property('mailChimpCampaignText')" />
+                  </args>
+               </payloadFactory>
+               <property name="mailChimpCampaignOptions" expression="json-eval($.mailChimpOptions)" />
+               <property name="mailChimpCampaignContent" expression="json-eval($.mailChimpContent)" />
+               <mailchimp.init>
+                  <apiUrl>{$ctx:mailChimpApiUrl}</apiUrl>
+                  <apiKey>{$ctx:mailChimpApiKey}</apiKey>
+                  <format>json</format>
+               </mailchimp.init>
+               <mailchimp.createDraftCampaign>
+                  <options>{$ctx:mailChimpCampaignOptions}</options>
+                  <content>{$ctx:mailChimpCampaignContent}</content>
+                  <type>regular</type>
+               </mailchimp.createDraftCampaign>
+               <filter source="$axis2:HTTP_SC" regex="200">
+                  <then>
+                     <property name="mailChimpCampaignID" expression="//jsonObject/id/text()" />
+                     <property name="id" expression="fn:concat('Campaign ID :',get-property('mailChimpCampaignID'))" />
+                     <property name="message" value="Campaign successfully created." />
+                     <property name="status" value="Success" />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="mailChimp_createCampaign" />
+                        <with-param name="id" value="{$ctx:id}" />
+                        <with-param name="status" value="{$ctx:status}" />
+                        <with-param name="message" value="{$ctx:message}" />
+                     </call-template>
+
+                     <mailchimp.init>
+                        <apiUrl>{$ctx:mailChimpApiUrl}</apiUrl>
+                        <apiKey>{$ctx:mailChimpApiKey}</apiKey>
+                        <format>json</format>
+                     </mailchimp.init>
+                     <mailchimp.sendCampaign>
+                        <campaignId>{$ctx:mailChimpCampaignID}</campaignId>
+                     </mailchimp.sendCampaign>
+                     <filter source="$axis2:HTTP_SC" regex="200">
+                        <then>
+                           <property name="id" expression="fn:concat('Campaign ID :',get-property('mailChimpCampaignID'))" />
+                           <property name="message" value="Campaign successfully sent." />
+                           <property name="status" value="Success" />
+                           <call-template target="responseHandlerTemplate">
+                              <with-param name="activity" value="mailChimp_sendCampaign" />
+                              <with-param name="id" value="{$ctx:id}" />
+                              <with-param name="status" value="{$ctx:status}" />
+                              <with-param name="message" value="{$ctx:message}" />
+                           </call-template>
+                           <loopback />
+                        </then>
+                        <else>
+                           <property name="id" expression="fn:concat('Campaign ID :',get-property('mailChimpCampaignID'))" />
+                           <property name="status" value="Failed" />
+                           <property name="errorMessage" expression="//jsonObject/error/text()" />
+                           <call-template target="responseHandlerTemplate">
+                              <with-param name="activity" value="mailChimp_sendCampaign" />
+                              <with-param name="id" value="{$ctx:id}" />
+                              <with-param name="status" value="{$ctx:status}" />
+                              <with-param name="message" value="{$ctx:message}" />
+                           </call-template>
+                           <loopback />
+                        </else>
+                     </filter>
+
+                  </then>
+                  <else>
+                     <property name="id" expression="fn:concat('Plan ID :',get-property('chargeBeePlanId'))" />
+                     <property name="status" value="Failed" />
+                     <property name="errorMessage" expression="//jsonObject/error/text()" />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="mailChimp_createCampaign" />
+                        <with-param name="id" value="{$ctx:id}" />
+                        <with-param name="status" value="{$ctx:status}" />
+                        <with-param name="message" value="{$ctx:message}" />
+                     </call-template>
+                     <loopback />
+                  </else>
+               </filter>
+            </then>
+            <else>
+               <property name="id" expression="fn:concat('Plan ID :',get-property('chargeBeePlanId'))" />
+               <property name="status" value="Failed" />
+               <property name="message" expression="//jsonObject/message/text()" />
+               <call-template target="responseHandlerTemplate">
+                  <with-param name="activity" value="charegBee_createPlan" />
+                  <with-param name="id" value="{$ctx:id}" />
+                  <with-param name="status" value="{$ctx:status}" />
+                  <with-param name="message" value="{$ctx:message}" />
+               </call-template>
+               <loopback />
+            </else>
+         </filter>
+      </inSequence>
+      <outSequence>
+         <payloadFactory media-type="json">
+            <format>
+               {
+               "Response":{
+               "activity":"chargebee_sendPlanCampaign",
+               "activityResponse":[$1]
+               }
+               }
+            </format>
+            <args>
+               <arg expression="get-property('operation','responseString')" />
+            </args>
+         </payloadFactory>
+         <property name="messageType" value="application/json" scope="axis2" />
+         <send />
+      </outSequence>
+   </target>
+   <description />
+</proxy>

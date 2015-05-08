@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+   Copyright (c) 2005-2015, WSO2 Inc. (http://www.wso2.org) All Rights Reserved.
+
+   WSO2 Inc. licenses this file to you under the Apache License,
+   Version 2.0 (the "License"); you may not use this file except
+   in compliance with the License.
+   You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing,
+   software distributed under the License is distributed on an
+   "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+   KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations
+   under the License.
+-->
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="chargebee_cancelSubscription" transports="https,http"
+   statistics="disable" trace="disable" startOnLoad="true">
+   <target>
+      <inSequence onError="faultHandlerSeq">
+
+
+         <!-- ChargeBee parameters. -->
+         <property name="chargeBeeApiUrl" expression="json-eval($.chargeBeeApiUrl)" />
+         <property name="chargeBeeApiKey" expression="json-eval($.chargeBeeApiKey)" />
+         <property name="chargeBeeSubscriptionId" expression="json-eval($.chargeBeeSubscriptionId)" />
+         <property name="chargeBeeIsEndOfTerm" expression="json-eval($.chargeBeeIsEndOfTerm)" />
+
+         <!-- MailChimp parameters. -->
+         <property name="mailChimpApiUrl" expression="json-eval($.mailChimpApiUrl)" />
+         <property name="mailChimpApiKey" expression="json-eval($.mailChimpApiKey)" />
+
+         <!-- Cancel subscription. -->
+         <chargebee.init>
+            <apiUrl>{$ctx:chargeBeeApiUrl}</apiUrl>
+            <apiKey>{$ctx:chargeBeeApiKey}</apiKey>
+         </chargebee.init>
+         <chargebee.cancelSubscription>
+            <subscriptionId>{$ctx:chargeBeeSubscriptionId}</subscriptionId>
+            <isEndOfTerm>{$ctx:chargeBeeIsEndOfTerm}</isEndOfTerm>
+         </chargebee.cancelSubscription>
+         <filter source="$axis2:HTTP_SC" regex="200">
+            <then>
+               <property name="chargeBeeCustomerEmail" expression="//jsonObject/customer/email/text()" />
+               <property name="chargeBeePlanId" expression="//jsonObject/subscription/plan_id/text()" />
+               <property name="chargeBeeCustomerID" expression="//jsonObject/customer/id/text()" />
+               <property name="id"
+                  expression="fn:concat('Customer ID :',get-property('chargeBeeCustomerID'),',Plan ID:', get-property('chargeBeePlanId'))" />
+               <property name="status" value="Success" />
+               <property name="message" value="Subscription successfully disabled." />
+               <call-template target="responseHandlerTemplate">
+                  <with-param name="activity" value="chargeBee_cancelSubscription" />
+                  <with-param name="id" value="{$ctx:id}" />
+                  <with-param name="status" value="{$ctx:status}" />
+                  <with-param name="message" value="{$ctx:message}" />
+               </call-template>
+
+               <mailchimp.init>
+                  <apiUrl>{$ctx:mailChimpApiUrl}</apiUrl>
+                  <apiKey>{$ctx:mailChimpApiKey}</apiKey>
+                  <format>json</format>
+               </mailchimp.init>
+               <mailchimp.listSubscriberLists>
+                  <listName>{$ctx:chargeBeePlanId}</listName>
+               </mailchimp.listSubscriberLists>
+               <property name="mailChimpListId" expression="//jsonObject/data[1]/id/text()" />
+               <filter xpath="boolean(get-property('mailChimpListId'))">
+                  <then>
+                     <payloadFactory media-type="json">
+                        <format>
+                           {
+                           "mailChimpBatch":[{"email":"$1"}]
+                           }
+                        </format>
+                        <args>
+                           <arg expression="get-property('chargeBeeCustomerEmail')" />
+                        </args>
+                     </payloadFactory>
+                     <property name="mailChimpBatch" expression="json-eval($.mailChimpBatch)" />
+                     <mailchimp.init>
+                        <apiUrl>{$ctx:mailChimpApiUrl}</apiUrl>
+                        <apiKey>{$ctx:mailChimpApiKey}</apiKey>
+                        <format>json</format>
+                     </mailchimp.init>
+                     <mailchimp.removeSubscribersFromList>
+                        <listId>{$ctx:mailChimpListId}</listId>
+                        <batch>{$ctx:mailChimpBatch}</batch>
+                        <deleteMember>{$ctx:deleteMember}</deleteMember>
+                        <sendNotify>{$ctx:sendNotify}</sendNotify>
+                        <sendGoodbye>{$ctx:sendGoodbye}</sendGoodbye>
+                     </mailchimp.removeSubscribersFromList>
+                     <property name="mailChimpResult" expression="//jsonObject/success_count" />
+                     <filter xpath="get-property('mailChimpResult') = 1">
+                        <then>
+                           <property name="id"
+                              expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'),',List ID:', get-property('mailChimpListId'))" />
+                           <property name="status" value="Success" />
+                           <property name="message"
+                              expression="fn:concat('Contact was successfully removed from ',get-property('chargeBeePlanId'),' subscriber list')" />
+                           <call-template target="responseHandlerTemplate">
+                              <with-param name="activity" value="mailChimp_removeSubscription" />
+                              <with-param name="id" value="{$ctx:id}" />
+                              <with-param name="status" value="{$ctx:status}" />
+                              <with-param name="message" value="{$ctx:message}" />
+                           </call-template>
+                           <loopback />
+                        </then>
+                        <else>
+                           <property name="id"
+                              expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'),',List ID:', get-property('chargeBeePlanId'))" />
+                           <property name="status" value="Failed" />
+                           <property name="errorMessage" expression="//jsonObject/error/text()" />
+                           <filter xpath="boolean(get-property('errorMessage'))">
+                              <then>
+                                 <property name="message" expression="get-property('errorMessage')" />
+                              </then>
+                              <else>
+                                 <property name="message" expression="//jsonObject/errors[1]/error/text()" />
+                              </else>
+                           </filter>
+                           <call-template target="responseHandlerTemplate">
+                              <with-param name="activity" value="mailChimp_removeSubscription" />
+                              <with-param name="id" value="{$ctx:id}" />
+                              <with-param name="status" value="{$ctx:status}" />
+                              <with-param name="message" value="{$ctx:message}" />
+                           </call-template>
+                           <loopback />
+                        </else>
+                     </filter>
+                  </then>
+                  <else>
+                     <property name="mailChimpError" expression="//jsonObject/error/text()" />
+                     <filter xpath="boolean(get-property('mailChimpError'))">
+                        <then>
+                           <property name="message" expression="get-property('mailChimpError')" />
+                        </then>
+                        <else>
+                           <property name="message" value="No matching subscriber list found for the plan." />
+                        </else>
+                     </filter>
+                     <property name="id"
+                        expression="fn:concat('Email :',get-property('chargeBeeCustomerEmail'),',List Name:', get-property('chargeBeePlanId'))" />
+                     <property name="status" value="Failed" />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="mailChimp_removeSubscription" />
+                        <with-param name="id" value="{$ctx:id}" />
+                        <with-param name="status" value="{$ctx:status}" />
+                        <with-param name="message" value="{$ctx:message}" />
+                     </call-template>
+                     <loopback />
+                  </else>
+               </filter>
+            </then>
+            <else>
+               <property name="id" expression="fn:concat('Subscription ID :',get-property('chargeBeeSubscriptionId'))" />
+               <property name="status" value="Failed" />
+               <property name="message" expression="//jsonObject/message/text()" />
+               <call-template target="responseHandlerTemplate">
+                  <with-param name="activity" value="charegBee_cancelSubscription" />
+                  <with-param name="id" value="{$ctx:id}" />
+                  <with-param name="status" value="{$ctx:status}" />
+                  <with-param name="message" value="{$ctx:message}" />
+               </call-template>
+               <loopback />
+            </else>
+         </filter>
+      </inSequence>
+      <outSequence>
+         <payloadFactory media-type="json">
+            <format>
+               {
+               "Response":{
+               "activity":"chargebee_cancelSubscription",
+               "activityResponse":[$1]
+               }
+               }
+            </format>
+            <args>
+               <arg expression="get-property('operation','responseString')" />
+            </args>
+         </payloadFactory>
+         <property name="messageType" value="application/json" scope="axis2" />
+         <send />
+      </outSequence>
+   </target>
+   <description />
+</proxy>
