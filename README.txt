@@ -37,3 +37,5 @@ ESB 4.9.0 Patch Location
 Method Completed: listSubscriptions. The offset parameter is not still working
 
 Note: PagerDuty Complete Connector is added as a reference.
+
+Completed
