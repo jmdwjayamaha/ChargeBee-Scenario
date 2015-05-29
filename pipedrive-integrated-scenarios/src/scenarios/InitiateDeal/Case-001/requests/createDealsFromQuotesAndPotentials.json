@@ -1,0 +1,18 @@
+{
+   "proworkflow" : {
+      "apiKey" : "C7SJ-WW5W-LE38-LJUE-PWFBNJM-TR65613",
+      "username" : "apptest.dilruk@gmail.com",
+      "password" : "1qaz2wsx@",
+      "quoteIds" : [3,4]
+   },
+   "zohocrm" : {
+      "accessToken":"a37ac08fa59f7be444a5bbd3e39f357c",
+    "potentialIds":[1271799000000094021,1271799000000094037]
+   },   
+   "pipedrive" : {
+      "apiToken":"ebf269a4442c99a22780e06d449f566aae82cd42",
+      "quoteIdCustomField" : "22cfbe90f43e1b5dfab441c3f4d6c0b86a39a19a",
+      "potentialCustomField" : "553d2277774dacdc426507a38c04ea8ea7ab9fba",
+      "dealCurrency":"USD"   
+   }
+}

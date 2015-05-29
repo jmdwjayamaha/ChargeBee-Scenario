@@ -1,0 +1,10 @@
+{
+   "pipedrive" : {
+      "apiToken":"2be1a597929f62a4666419738eb95536f87fe715"
+   },
+   "gmail" : {
+      "username": "apptest.virajith@gmail.com",
+      "accessToken": "",
+      "fromAddress": "apptest.dilruk@gmail.com"
+   }
+}
