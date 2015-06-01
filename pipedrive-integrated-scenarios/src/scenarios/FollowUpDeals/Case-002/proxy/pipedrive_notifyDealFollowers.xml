@@ -5,8 +5,8 @@
       <inSequence onError="faultHandlerSeq">
 
          <!-- Pipedrive parameters -->
-         <property name="pipedriveApiUrl" value="https://api.pipedrive.com"/>
-         <property name="pipedriveApiToken" expression="json-eval($.pipedrive.apiToken)"/>
+         <property name="pipedriveApiUrl" value="https://api.pipedrive.com" />
+         <property name="pipedriveApiToken" expression="json-eval($.pipedrive.apiToken)" />
 
          <!-- Gmail parameters -->
          <property name="gmailUsername" expression="json-eval($.gmail.username)" />
@@ -40,12 +40,12 @@
                <loopback />
             </then>
          </filter>
-         
+
          <property name="dealCount" expression="count(//deals)" scope="operation" />
          <property name="dealIndex" expression="0" scope="operation" />
          <property name="followersCount" value="0" scope="operation" />
          <property name="followersIndex" value="0" scope="operation" />
-       
+
          <filter xpath="0 = get-property('operation', 'dealCount')">
             <then>
                <property name="id" value="{}" />
@@ -58,15 +58,18 @@
                <loopback />
             </then>
          </filter>
-         
+
          <!-- Deals iterator -->
-         <iterate continueParent="true" id="dealIterator" expression="//deals" sequential="true" preservePayload="true">
+         <iterate continueParent="false" id="dealIterator" expression="//deals" sequential="true"
+            preservePayload="true">
             <target>
                <sequence>
                   <property name="dealId" expression="//id" />
                   <property name="dealTitle" expression="//title" />
                   <property name="dealExpectedCloseDate" expression="//expected_close_date" />
-                  
+
+                  <property name="dealIndex" expression="get-property('operation','dealIndex') + 1" scope="operation" />
+
                   <!-- Get the followers for the deal from Pipedrive -->
                   <pipedrive.init>
                      <apiToken>{$ctx:pipedriveApiToken}</apiToken>
@@ -75,13 +78,14 @@
                   <pipedrive.listDealFollowers>
                      <id>{$ctx:dealId}</id>
                   </pipedrive.listDealFollowers>
-                  
+
                   <property name="responseStatus" expression="$axis2:HTTP_SC" />
                   <filter xpath="get-property('responseStatus') != 200">
                      <then>
                         <property name="id" expression="fn:concat('dealId:', get-property('dealId'))" />
                         <property name="message" expression="json-eval($.error_info)" />
-                        <property name="message" expression="fn:concat('Cannot retrieve deal followers. Error: ', get-property('message'))" />
+                        <property name="message"
+                           expression="fn:concat('Cannot retrieve deal followers. Error: ', get-property('message'))" />
                         <call-template target="responseHandlerTemplate">
                            <with-param name="activity" value="pipedrive_listDealsTimeline" />
                            <with-param name="id" value="{$ctx:id}" />
@@ -91,16 +95,16 @@
                      </then>
                      <else>
                         <property name="followersCountForDeal" expression="count(//data)" />
-                        <property name="followersCount" expression="get-property('operation','followersCount') + get-property('followersCountForDeal')" scope="operation" />
-                        
-                        <property name="dealIndex" expression="get-property('operation','dealIndex') + 1" scope="operation" />
-                        
+                        <property name="followersCount"
+                           expression="get-property('operation','followersCount') + get-property('followersCountForDeal')"
+                           scope="operation" />
+
                         <property name="emailList" value="" scope="operation" />
-                        <iterate continueParent="true" id="followersIterator" expression="//data" sequential="true">
+                        <iterate continueParent="false" id="followersIterator" expression="//data" sequential="true">
                            <target>
                               <sequence>
                                  <property name="followerId" expression="//data" />
-                                 
+
                                  <!-- Retrieve details of the follower -->
                                  <pipedrive.init>
                                     <apiToken>{$ctx:pipedriveApiToken}</apiToken>
@@ -109,13 +113,14 @@
                                  <pipedrive.getUser>
                                     <id>{$ctx:followerId}</id>
                                  </pipedrive.getUser>
-      
+
                                  <property name="responseStatus" expression="$axis2:HTTP_SC" />
                                  <filter xpath="get-property('responseStatus') != 200">
                                     <then>
                                        <property name="id" expression="fn:concat('dealId:', get-property('dealId'))" />
                                        <property name="message" expression="json-eval($.error_info)" />
-                                       <property name="message" expression="fn:concat('Cannot retrieve follower information. Error: ', get-property('message'))" />
+                                       <property name="message"
+                                          expression="fn:concat('Cannot retrieve follower information. Error: ', get-property('message'))" />
                                        <call-template target="responseHandlerTemplate">
                                           <with-param name="activity" value="pipedrive_listDealsTimeline" />
                                           <with-param name="id" value="{$ctx:id}" />
@@ -125,23 +130,112 @@
                                     </then>
                                     <else>
                                        <property name="followerEmail" expression="//email" />
-                                       
-                                       <property name="emailList" expression="fn:concat(get-property('operation', 'emailList'), get-property('followerEmail'), ';')" scope="operation" />
+
+                                       <property name="emailList"
+                                          expression="fn:concat(get-property('operation', 'emailList'), get-property('dealId'), ':',get-property('followerEmail'), ',')"
+                                          scope="operation" />
                                     </else>
                                  </filter>
-                                 
-                                 <property name="followersIndex" expression="get-property('operation','followersIndex') + 1" scope="operation" />
-                                 
+
+                                 <property name="followersIndex" expression="get-property('operation','followersIndex') + 1"
+                                    scope="operation" />
+
                               </sequence>
                            </target>
                         </iterate>
-                        
+
+                     </else>
+                  </filter>
+
+               </sequence>
+            </target>
+         </iterate>
+
+         <filter
+            xpath="(get-property('operation', 'dealCount') = get-property('operation', 'dealIndex')) and
+                                 (get-property('operation', 'followersCount') = get-property('operation', 'followersIndex'))">
+            <then>
+
+               <pipedrive.init>
+                  <apiToken>{$ctx:pipedriveApiToken}</apiToken>
+                  <apiUrl>{$ctx:pipedriveApiUrl}</apiUrl>
+               </pipedrive.init>
+               <pipedrive.listDealsTimeline>
+                  <amount>2</amount>
+                  <startDate>{$ctx:currentDate}</startDate>
+                  <interval>week</interval>
+                  <fieldKey>expected_close_date</fieldKey>
+               </pipedrive.listDealsTimeline>
+
+               <property name="responseStatus" expression="$axis2:HTTP_SC" />
+               <filter xpath="get-property('responseStatus') != 200">
+                  <then>
+                     <property name="id" value="{}" />
+                     <property name="message" expression="json-eval($.error_info)" />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="pipedrive_listDealsTimeline" />
+                        <with-param name="id" value="{$ctx:id}" />
+                        <with-param name="status" value="Error" />
+                        <with-param name="message" value="{$ctx:message}" />
+                     </call-template>
+                     <loopback />
+                  </then>
+               </filter>
+
+               <property name="dealCount" expression="count(//deals)" scope="operation" />
+               <property name="dealIndex" expression="0" scope="operation" />
+
+               <filter xpath="0 = get-property('operation', 'dealCount')">
+                  <then>
+                     <property name="id" value="{}" />
+                     <call-template target="responseHandlerTemplate">
+                        <with-param name="activity" value="pipedrive_listDealsTimeline" />
+                        <with-param name="id" value="{$ctx:id}" />
+                        <with-param name="status" value="Error" />
+                        <with-param name="message" value="No deals were returned from Pipedrive" />
+                     </call-template>
+                     <loopback />
+                  </then>
+               </filter>
+
+               <!-- Deals iterator -->
+               <iterate continueParent="false" id="dealIterator" expression="//deals" sequential="true"
+                  preservePayload="true">
+                  <target>
+                     <sequence>
+                        <property name="dealId" expression="//id" />
+                        <property name="dealTitle" expression="//title" />
+                        <property name="dealExpectedCloseDate" expression="//expected_close_date" />
+
+                        <property name="emailList" expression="get-property('operation', 'emailList')" />
+                        <script language="js">
+                           <![CDATA[
+                              var dealId = mc.getProperty('dealId');
+                              var emailList = mc.getProperty('emailList');
+                              
+                              var toEmailList = "";
+                              
+                              var emailArray = emailList.split(",");
+                              print("EEEEEEEEEEEEEEEEEEEEEEEEEEEEE" + emailArray);
+                              
+                              for (var emailString in emailArray) {
+                                 valueArray = emailString.split(":");
+                                 
+                                 if( valueArray[0] == dealId) {
+                                    toEmailList += valueArray[1] + ";";
+                                 }
+                              }
+                              
+                              mc.setProperty('toEmailList', toEmailList);
+                           ]]>
+                        </script>
+
                         <!-- Build the message body -->
                         <payloadFactory media-type="json">
                            <format>
                               {
-                                 "mailSubject": "Deal $1 expected to close on $2",
-                                 "mailContent": "Hi,\n\nPlease be informed that the $1 deal with id $3 is expected to be closed on $2 days."
+                              "mailSubject": "Deal \"$1\" is expected to be closed on $2",
+                              "mailContent": "Hi,\n\nPlease be informed that the deal \"$1\" (ID: $3) is expected to be closed on $2."
                               }
                            </format>
                            <args>
@@ -151,9 +245,10 @@
                            </args>
                         </payloadFactory>
 
-                        <!-- Build the message body to send in gmail -->
+                        <!-- Build the message body to send in GMail -->
                         <property name="gmailSubject" expression="json-eval($.mailSubject)" />
                         <property name="gmailTextContent" expression="json-eval($.mailContent)" />
+                        <property name="emailList" expression="get-property('operation', 'emailList')" />
 
                         <!-- Send mail in Gmail -->
                         <filter source="boolean(get-property('gmailAccessToken'))" regex="true">
@@ -163,12 +258,10 @@
                                  <userId>{$ctx:gmailUsername}</userId>
                               </gmail.gmailinit>
                               <gmail.createAMail>
-                                 <to>{$ctx:emailList}</to>
+                                 <to>{$ctx:toEmailList}</to>
                                  <subject>{$ctx:gmailSubject}</subject>
                                  <from>{$ctx:gmailFromAddress}</from>
                                  <messageBody>{$ctx:gmailTextContent}</messageBody>
-                                 <cc></cc>
-                                 <bcc></bcc>
                               </gmail.createAMail>
 
                               <property name="messageId" expression="json-eval($.id)" />
@@ -176,11 +269,12 @@
                               <filter source="boolean(get-property('messageId'))" regex="false">
                                  <then>
                                     <property name="status" value="Error" />
-                                    <property name="message" expression="json-eval($.)" scope="operation" />
+                                    <property name="message" expression="json-eval($.error.message)" />
                                  </then>
                                  <else>
                                     <property name="status" value="Success" />
-                                    <property name="message" expression="json-eval($.)" scope="operation" />
+                                    <property name="message"
+                                       value="The notification mail is successfully sent to the followers" />
                                  </else>
                               </filter>
                            </then>
@@ -189,7 +283,7 @@
                               <property name="message" value="Gmail OAuth access token is not provided in the request." />
                            </else>
                         </filter>
-                        
+
                         <property name="id" expression="fn:concat('dealId:',get-property('dealId'))" />
                         <call-template target="responseHandlerTemplate">
                            <with-param name="activity" value="gmail_sendMail" />
@@ -197,29 +291,29 @@
                            <with-param name="status" value="{$ctx:status}" />
                            <with-param name="message" value="{$ctx:message}" />
                         </call-template>
-                             
-                     </else>
-                  </filter>
-                  
-               </sequence>
-            </target>
-         </iterate>
 
-         <filter
-            xpath="(get-property('operation', 'dealCount') = get-property('operation', 'dealIndex')) and
-                                 (get-property('operation', 'followersCount') = get-property('operation', 'followersIndex'))">
-            <then>
-               <loopback />
+                        <property name="dealIndex" expression="get-property('operation','dealIndex') + 1"
+                           scope="operation" />
+
+                     </sequence>
+                  </target>
+               </iterate>
+
+               <filter xpath="get-property('operation', 'dealCount') = get-property('operation', 'dealIndex')">
+                  <then>
+                     <loopback />
+                  </then>
+               </filter>
             </then>
          </filter>
-         
+
       </inSequence>
       <outSequence>
-      
+
          <payloadFactory media-type="json">
             <format>{
                "Response":{
-                  "activity":"pipedrive_notifyDealFollowers",
+                     "activity":"pipedrive_notifyDealFollowers",
                      "activityResponse":[$1]
                   }
                }
@@ -230,7 +324,7 @@
          </payloadFactory>
          <property name="messageType" value="application/json" scope="axis2" />
          <send />
-         
+
       </outSequence>
    </target>
    <description />
